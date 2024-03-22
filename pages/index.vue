@@ -1,4 +1,6 @@
 <script setup>
+import TipTapEditor from '~/components/TipTapEditor.vue'
+
 useHead({
     title: "Homepage"
 });
@@ -6,6 +8,6 @@ useHead({
 
 <template>
     <div class="p-4">
-        <h1 class="text-xl m-0">Homepage</h1>
+      <TipTapEditor/>
     </div>
 </template>
