@@ -1,5 +1,5 @@
 <script setup>
-import TipTapEditor from '~/components/TipTapEditor.vue'
+import TipTapEditor from "~/components/TipTapEditor.vue";
 
 useHead({
     title: "Homepage"
@@ -8,6 +8,8 @@ useHead({
 
 <template>
     <div class="p-4">
-      <TipTapEditor/>
+        <div class="max-w-3xl mx-auto">
+            <TipTapEditor/>
+        </div>
     </div>
 </template>
