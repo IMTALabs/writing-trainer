@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Custom reset
+:focus-visible {
+  @apply outline-none;
+}
+
+// Tiptop
+.tiptap {
+  @for $i from 1 through 6 {
+    h#{$i} {
+      font-size: 1.5rem - 0.1rem * $i;
+      font-weight: 1000 - 100 * $i;
+    }
+  }
+}
