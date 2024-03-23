@@ -45,17 +45,36 @@
 
     <editor-content class="mt-4" :editor="editor"/>
 
-    <pre class="mt-8">{{ editor?.getHTML() }}</pre>
+    <!--    <pre class="mt-8">{{ editor?.getHTML() }}</pre>-->
 </template>
 
 <script setup>
-import { useEditor, EditorContent } from "@tiptap/vue-3";
+import {useEditor, EditorContent} from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
+import {Placeholder} from "@tiptap/extension-placeholder";
 
 const editor = useEditor({
-    content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
+    content: "",
     extensions: [
-        StarterKit
+        StarterKit,
+        Placeholder.configure({
+            placeholder: 'Enter your submission',
+            emptyNodeClass: 'my-custom-is-empty-class',
+            showOnlyWhenEditable: false,
+        })
     ]
 });
 </script>
+
+<style scoped lang="scss">
+:deep(.tiptap) p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+}
+:deep(.tiptap){
+    height: 300px;
+}
+</style>
