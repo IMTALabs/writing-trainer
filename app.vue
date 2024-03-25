@@ -20,6 +20,12 @@ useHead({
 const themeOverrides = {
     Button: {
         textColorTextHover: "#000000"
+    },
+    LoadingBar: {
+        colorLoading: "#000000"
+    },
+    Spin: {
+        color: "#000000"
     }
 };
 </script>
