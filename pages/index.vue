@@ -56,7 +56,6 @@ const handleSubmit = async () => {
         evaluateStore.setBadParts(response.display_errors.bad_parts);
         isEditing.value = false;
     } catch (error) {
-        console.log(error);
         message.error(error);
     } finally {
         loadingBar.finish();
