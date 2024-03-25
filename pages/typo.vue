@@ -10,13 +10,16 @@ const loadingBar = useLoadingBar();
 const message = useMessage();
 
 const diff = ref([]);
-const handleSubmit = async (content) => {
-    console.log(content);
 
+const fixedTypos = ref("");
+const origin = ref("");
+
+const typoFixed = ref("");
+const handleSubmit = async (content) => {
     loadingBar.start();
     showSpin.value = true;
     try {
-        const response = await $fetch("http://35.196.248.69:8800/fix_typos", {
+        const response = await $fetch("https://8800.imta-chatbot.online/fix_typos", {
             method: "POST",
             body: {
                 id: String(Date.now() * Math.random()),
@@ -26,8 +29,19 @@ const handleSubmit = async (content) => {
             },
             retry: 2
         });
-        console.log(response);
+        fixedTypos.value = response.fixed_typos;
+        origin.value = response.origin;
         diff.value = response ? generateDiff(response.origin, response.fixed_typos) : [];
+        typoFixed.value = diff.value.map((item) => {
+            if (item.added) {
+                return `<span class="text-green-500 bg-green-50 px-1">${item.value}</span>`;
+            }
+            if (item.removed) {
+                return `<span class="text-red-500 bg-red-50 line-through px-1">${item.value}</span>`;
+            }
+            return item.value;
+        }).join("");
+        console.log(typoFixed.value);
         isEditing.value = false;
     } catch (error) {
         message.error(error);
@@ -42,19 +56,18 @@ const generateDiff = (origin, fixed) => {
     return diff.map(part => ({
         value: part.value,
         removed: part.removed,
-        color: part.added ? "green" : part.removed ? "red" : ""
-
+        added: part.added
     }));
-}
+};
 </script>
 
 <template>
     <NSpin :show="showSpin">
         <div class="h-full">
             <div class="max-w-3xl mx-auto border-x min-h-full">
-                <div class="p-4">
-                    <label class="text-sm font-semibold flex items-center justify-between gap-1">
-                        Evaluate
+                <div class="p-4" v-if="isEditing">
+                    <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                        Fix typo
                         <n-tooltip trigger="hover">
                             <template #trigger>
                                 <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
@@ -62,25 +75,34 @@ const generateDiff = (origin, fixed) => {
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit
                         </n-tooltip>
                     </label>
-                    <div class="p-4 ">
-                        <TypoEditor v-if="isEditing" @submit="handleSubmit"/>
-                        <div v-else class="">
-                            <div class="text-right">
-                                <NButton color="#000000" size="small" @click="isEditing = true">
-                                    Back to typo
-                                </NButton>
-                            </div>
-                            <div class="mt-4">
-                                <span v-for="(part, index) in diff" :key="index"
-                                      :style="{ color: part.color , 'text-decoration': part.removed ? 'line-through' : 'none'  }">{{
-                                        part.value
-                                    }}</span>
-                            </div>
-
-                        </div>
+                    <div class="mt-4">
+                        <TypoEditor @submit="handleSubmit"/>
                     </div>
                 </div>
+                <div v-else class="p-4">
+                    <div class="border-b border-solid pb-4">
+                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                            Compare
+                            <NButton color="#000000" size="small" @click="isEditing = true" ghost>
+                                Back to typo
+                            </NButton>
+                        </label>
+                        <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
+                    </div>
+                    <div class="border-b border-solid py-4">
+                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                            Fixed
+                        </label>
+                        <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
+                    </div>
+                    <div class="border-b border-solid py-4">
+                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                            Your submission
+                        </label>
+                        <div class="mt-4 text-base leading-7" v-html="origin"></div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </NSpin>

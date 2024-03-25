@@ -1,5 +1,37 @@
+<script setup>
+import { useEditor, EditorContent } from "@tiptap/vue-3";
+import StarterKit from "@tiptap/starter-kit";
+import { Placeholder } from "@tiptap/extension-placeholder";
+
+// Stores
+const evaluateStore = useEvaluateStore();
+
+// Composable
+const editor = useEditor({
+    content: evaluateStore.submission,
+    extensions: [
+        StarterKit,
+        Placeholder.configure({
+            placeholder: "Enter your submission",
+            emptyNodeClass: "my-custom-is-empty-class",
+            showOnlyWhenEditable: false
+        })
+    ]
+});
+
+// Events
+const emit = defineEmits(["submit"]);
+
+// Methods
+const submit = () => {
+    const content = editor.value.getHTML();
+    evaluateStore.setSubmission(content);
+    emit("submit");
+};
+</script>
+
 <template>
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
             <NButton :color="'#000000'" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" size="small"
                      :ghost="!editor?.isActive('heading', { level: 1 })">
@@ -23,7 +55,7 @@
             </NButton>
         </div>
 
-        <NButton color="#000000" size="small" @click="submit">
+        <NButton color="#000000" @click="submit">
             Evaluate
         </NButton>
     </div>
@@ -31,38 +63,10 @@
     <EditorContent class="mt-4" :editor="editor"/>
 </template>
 
-<script setup>
-import { useEditor, EditorContent } from "@tiptap/vue-3";
-import StarterKit from "@tiptap/starter-kit";
-import { Placeholder } from "@tiptap/extension-placeholder";
-
-const evaluateStore = useEvaluateStore();
-
-const editor = useEditor({
-    content: evaluateStore.submission,
-    extensions: [
-        StarterKit,
-        Placeholder.configure({
-            placeholder: "Enter your submission",
-            emptyNodeClass: "my-custom-is-empty-class",
-            showOnlyWhenEditable: false
-        })
-    ]
-});
-
-const emit = defineEmits(["submit"]);
-
-const submit = () => {
-    const content = editor.value.getHTML();
-    evaluateStore.setSubmission(content);
-    emit("submit");
-};
-</script>
-
 <style scoped lang="scss">
 :deep(.tiptap) {
     p {
-        @apply leading-6;
+        @apply leading-7 text-base;
     }
 
     p.is-editor-empty:first-child::before {

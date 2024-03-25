@@ -1,4 +1,5 @@
 <script setup>
+// Props
 const props = defineProps({
     paragraph: {
         type: String,
@@ -6,13 +7,16 @@ const props = defineProps({
     }
 });
 
+// Data
 const sentences = ref([]);
 
+// Mounted
 onMounted(() => {
     if (props.paragraph === "<p></p>") {
         sentences.value = ["<br>"];
     } else {
         const paragraph = props.paragraph.replace(/<p>/g, "").replace(/<p/g, "").replace(/<\/p>/g, "");
+        // This statement must be called in mounted hook, because it uses document.createElement - which is not available in setup
         const tempEl = document.createElement("div");
         tempEl.innerHTML = paragraph;
 
@@ -34,7 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="paragraph leading-7">
+    <div class="paragraph leading-7 text-base">
         <template v-for="sentence in sentences">
             <br v-if="sentence === '<br>'">
             <span v-else-if="typeof sentence === 'string'">{{ sentence }}</span>
