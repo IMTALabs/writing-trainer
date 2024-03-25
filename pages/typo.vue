@@ -101,7 +101,6 @@ const generateDiff = (origin, fixed) => {
                         </label>
                         <div class="mt-4 text-base leading-7" v-html="origin"></div>
                     </div>
-
                 </div>
             </div>
         </div>
