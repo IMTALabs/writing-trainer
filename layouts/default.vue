@@ -6,7 +6,7 @@ import Navbar from "~/components/common/Navbar.vue";
 <template>
     <Header/>
     <Navbar/>
-    <main class="h-[calc(100vh-130px)]">
+    <main>
       <slot></slot>
     </main>
 </template>

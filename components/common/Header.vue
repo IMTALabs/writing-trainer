@@ -14,7 +14,7 @@
             <template #icon>
                 <NaiveIcon name="ic:baseline-feedback" :size="16"/>
             </template>
-            Đóng góp ý kiến
+            Feedback
         </n-button>
     </header>
 </template>
