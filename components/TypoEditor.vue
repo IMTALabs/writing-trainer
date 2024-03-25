@@ -25,38 +25,14 @@
                         <NaiveIcon name="lucide:heading-3"/>
                     </template>
                 </n-button>
-
-                <n-button :color="'#000000'" @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
-                          size="small"
-                          :ghost="!editor?.isActive('heading', { level: 4 })">
-                    <template #icon>
-                        <NaiveIcon name="lucide:heading-4"/>
-                    </template>
-                </n-button>
-
-                <n-button :color="'#000000'" @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
-                          size="small"
-                          :ghost="!editor?.isActive('heading', { level: 5 })">
-                    <template #icon>
-                        <NaiveIcon name="lucide:heading-5"/>
-                    </template>
-                </n-button>
-
-                <n-button :color="'#000000'" @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
-                          size="small"
-                          :ghost="!editor?.isActive('heading', { level: 6 })">
-                    <template #icon>
-                        <NaiveIcon name="lucide:heading-6"/>
-                    </template>
-                </n-button>
             </n-space>
         </div>
         <NButton color="#000000" size="small" @click="submitContent">
-            Evaluate
+            Fix
         </NButton>
     </div>
 
-    <editor-content class="mt-4" :editor="editor"/>
+    <editor-content class="mt-4 text-base" :editor="editor"/>
     <div class="character-count mt-4 text-xs text-gray-400" v-if="editor">
         <div class="flex gap-3 justify-end">
             <NTag size="small"
