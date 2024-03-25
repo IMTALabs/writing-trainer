@@ -38,10 +38,12 @@ const childUp = () => {
     isShow.value = false;
     emit("childUp");
 };
+
+const evaluateStore = useEvaluateStore();
 </script>
 
 <template>
-    <NPopover trigger="manual" style="width: 200px" :show="isShow">
+    <NPopover trigger="manual" style="max-width: 360px" :show="isShow">
         <template #trigger>
             <span :class="sentence?.type" @mouseleave="isShow = false" @mousemove.stop="showUp">
                 <template v-for="token in tokens">
@@ -55,7 +57,10 @@ const childUp = () => {
                 Word error #{{ sentence?.id }}
             </n-tag>
         </template>
-        <span v-html="sentence.text"></span>
+        <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details" class="flex flex-col space-y-1 py-2 border-b last:border-none">
+            <span><span class="font-bold">Issue:</span> {{ detail.issue }}</span>
+            <span><span class="font-bold">Idea:</span> {{ detail.idea }}</span>
+        </div>
     </NPopover>
 </template>
 
