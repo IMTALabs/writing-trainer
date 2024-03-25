@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <nav class="p-4 border-b border-solid flex items-center space-x-4">
+    <nav class="p-4 border-b border-solid flex items-center space-x-2">
         <NuxtLink to="/" class="px-2">
             <n-button text>
                 <template #icon>
@@ -11,7 +11,7 @@
                         <NaiveIcon class="mr-2" name="mdi:marker"/>
                     </n-icon>
                 </template>
-                Chấm điểm bài viết
+                Evaluate
             </n-button>
         </NuxtLink>
 
@@ -22,7 +22,7 @@
                         <NaiveIcon class="mr-2" name="material-symbols:auto-fix"/>
                     </n-icon>
                 </template>
-                Sửa lỗi chính tả
+                Fix typo
             </n-button>
         </NuxtLink>
     </nav>
