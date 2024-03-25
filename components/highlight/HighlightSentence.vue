@@ -1,4 +1,5 @@
 <script setup>
+// Props
 const props = defineProps({
     sentence: {
         type: Object,
@@ -6,6 +7,7 @@ const props = defineProps({
     }
 });
 
+// Computed
 const tokens = computed(() => {
     const rawSentence = props.sentence.text;
     const sentence = rawSentence.replace(/<p>/g, "").replace(/<\/p>/g, "");
@@ -28,8 +30,13 @@ const tokens = computed(() => {
     return tokens;
 });
 
+// Events
 const emit = defineEmits(["childUp"]);
+
+// Data
 const isShow = ref(false);
+
+// Methods
 const showUp = () => {
     isShow.value = true;
     emit("childUp");
@@ -39,11 +46,12 @@ const childUp = () => {
     emit("childUp");
 };
 
+// Stores
 const evaluateStore = useEvaluateStore();
 </script>
 
 <template>
-    <NPopover trigger="manual" style="max-width: 360px" :show="isShow">
+    <NPopover trigger="manual" style="max-width: 360px" :show="isShow" :show-arrow="false">
         <template #trigger>
             <span :class="sentence?.type" @mouseleave="isShow = false" @mousemove.stop="showUp">
                 <template v-for="token in tokens">
@@ -57,7 +65,8 @@ const evaluateStore = useEvaluateStore();
                 Word error #{{ sentence?.id }}
             </n-tag>
         </template>
-        <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details" class="flex flex-col space-y-1 py-2 border-b last:border-none">
+        <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details"
+             class="flex flex-col space-y-1 py-2 border-b last:border-none">
             <span><span class="font-bold">Issue:</span> {{ detail.issue }}</span>
             <span><span class="font-bold">Idea:</span> {{ detail.idea }}</span>
         </div>

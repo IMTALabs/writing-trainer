@@ -1,12 +1,12 @@
 <script setup>
 import EvaluateEditor from "~/components/EvaluateEditor.vue";
 
+// Page meta
 useHead({
     title: "Homepage"
 });
 
-const evaluateStore = useEvaluateStore();
-
+// Theme overrides
 const inputThemeOverrides = {
     border: "none",
     borderHover: "none",
@@ -14,13 +14,19 @@ const inputThemeOverrides = {
     boxShadowFocus: "none"
 };
 
+// Store
+const evaluateStore = useEvaluateStore();
+
+// Data
 const showSpin = ref(false);
 const isEditing = ref(true);
 const highlight = ref(null);
 
+// Composable
 const message = useMessage();
 const loadingBar = useLoadingBar();
 
+// Methods
 const handleSubmit = async () => {
     if (!evaluateStore.instruction) {
         message.error("Instruction is required");
@@ -61,43 +67,46 @@ const handleSubmit = async () => {
 
 <template>
     <NSpin :show="showSpin">
-        <div class="px-4">
-            <div class="max-w-3xl mx-auto border-x min-h-[calc(100vh-130px)]">
-                <div class="border-b p-4">
-                    <label class="text-lg font-semibold flex items-center justify-between gap-1">
-                        Instruction
-                        <n-tooltip trigger="hover">
-                            <template #trigger>
-                                <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
-                            </template>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                        </n-tooltip>
-                    </label>
-                    <n-input
-                        v-model:value="evaluateStore.instruction"
-                        :theme-overrides="inputThemeOverrides"
-                        placeholder="Enter your writing instruction"
-                        type="textarea"
-                        :autosize="{
-                        minRows: 3,
-                        maxRows: 5
-                    }"
-                    />
-                </div>
-                <div class="p-4">
-                    <label class="text-lg font-semibold flex items-center justify-between gap-1 mb-4">
-                        Submission
-                        <n-tooltip trigger="hover">
-                            <template #trigger>
-                                <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
-                            </template>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                        </n-tooltip>
-                    </label>
-                    <EvaluateEditor v-if="isEditing" @submit="handleSubmit"/>
-                    <div v-else>
-                        <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)" :paragraph="paragraph"/>
-                    </div>
+        <div class="max-w-3xl mx-auto border-x min-h-[calc(100vh-130px)]">
+            <div class="border-b p-4">
+                <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                    Instruction
+                    <NTooltip trigger="hover">
+                        <template #trigger>
+                            <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
+                        </template>
+                        Enter your writing instruction here to make the evaluation process easier
+                    </NTooltip>
+                </label>
+                <NInput
+                    v-model:value="evaluateStore.instruction"
+                    :theme-overrides="inputThemeOverrides"
+                    placeholder="Enter your writing instruction here"
+                    type="textarea"
+                    :autosize="{
+                            minRows: 3,
+                            maxRows: 5
+                        }"
+                />
+            </div>
+            <div class="p-4">
+                <label class="text-lg font-semibold flex items-center justify-between gap-1 mb-4">
+                    Submission
+                    <NTooltip trigger="hover">
+                        <template #trigger>
+                            <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
+                        </template>
+                        Enter your submission here to evaluate
+                    </NTooltip>
+                </label>
+
+                <EvaluateEditor v-if="isEditing" @submit="handleSubmit"/>
+                <div v-else>
+                    <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost class="mb-4">
+                        Back to edit
+                    </NButton>
+                    <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
+                                        :paragraph="paragraph"/>
                 </div>
             </div>
         </div>
