@@ -31,7 +31,7 @@ const submit = () => {
 </script>
 
 <template>
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
             <NButton :color="'#000000'" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" size="small"
                      :ghost="!editor?.isActive('heading', { level: 1 })">
@@ -66,7 +66,7 @@ const submit = () => {
 <style scoped lang="scss">
 :deep(.tiptap) {
     p {
-        @apply leading-7 text-base;
+        @apply text-base leading-7;
     }
 
     p.is-editor-empty:first-child::before {

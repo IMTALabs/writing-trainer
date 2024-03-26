@@ -38,7 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="paragraph leading-7 text-base">
+    <div class="text-base leading-7 paragraph">
         <template v-for="sentence in sentences">
             <br v-if="sentence === '<br>'">
             <span v-else-if="typeof sentence === 'string'">{{ sentence }}</span>

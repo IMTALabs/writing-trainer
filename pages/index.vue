@@ -68,7 +68,7 @@ const handleSubmit = async () => {
     <NSpin :show="showSpin">
         <div class="max-w-3xl mx-auto border-x min-h-[calc(100vh-130px)]">
             <div class="border-b p-4">
-                <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                     Instruction
                     <NTooltip trigger="hover">
                         <template #trigger>
@@ -89,7 +89,7 @@ const handleSubmit = async () => {
                 />
             </div>
             <div class="p-4">
-                <label class="text-lg font-semibold flex items-center justify-between gap-1 mb-4">
+                <label class="mb-4 flex items-center justify-between gap-1 text-lg font-semibold">
                     Submission
                     <NTooltip trigger="hover">
                         <template #trigger>
