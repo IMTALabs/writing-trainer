@@ -26,6 +26,9 @@ const themeOverrides = {
     },
     Spin: {
         color: "#000000"
+    },
+    Form: {
+        feedbackHeightMedium: 0
     }
 };
 </script>

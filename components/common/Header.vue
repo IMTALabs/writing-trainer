@@ -1,24 +1,18 @@
-<script setup lang="ts">
-
+<script setup>
+import Feedback from "~/components/common/Feedback.vue";
 </script>
 
 <template>
-    <header class="p-4 border-b border-solid flex items-center justify-between">
+    <header class="flex items-center justify-between border-b border-solid p-4">
         <div class="flex items-center">
-            <h1 class="text-xl font-normal m-0">
+            <h1 class="m-0 text-xl font-normal">
                 Writing Trainer
             </h1>
             <NaiveIcon class="ml-1" name="ic:outline-mode-edit"/>
         </div>
-        <n-button color="#000000">
-            <template #icon>
-                <NaiveIcon name="ic:baseline-feedback" :size="16"/>
-            </template>
-            Feedback
-        </n-button>
+        <Feedback/>
     </header>
 </template>
 
 <style scoped>
-
 </style>

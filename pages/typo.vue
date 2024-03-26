@@ -34,10 +34,10 @@ const handleSubmit = async (content) => {
         diff.value = response ? generateDiff(response.origin, response.fixed_typos) : [];
         typoFixed.value = diff.value.map((item) => {
             if (item.added) {
-                return `<span class="text-green-500 bg-green-50 px-1">${item.value}</span>`;
+                return `<span class="bg-green-50 px-1 text-green-500">${item.value}</span>`;
             }
             if (item.removed) {
-                return `<span class="text-red-500 bg-red-50 line-through px-1">${item.value}</span>`;
+                return `<span class="bg-red-50 px-1 text-red-500 line-through">${item.value}</span>`;
             }
             return item.value;
         }).join("");
@@ -64,9 +64,9 @@ const generateDiff = (origin, fixed) => {
 <template>
     <NSpin :show="showSpin">
         <div class="h-full">
-            <div class="max-w-3xl mx-auto border-x min-h-full">
+            <div class="mx-auto min-h-full max-w-3xl border-x">
                 <div class="p-4" v-if="isEditing">
-                    <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                         Fix typo
                         <n-tooltip trigger="hover">
                             <template #trigger>
@@ -81,7 +81,7 @@ const generateDiff = (origin, fixed) => {
                 </div>
                 <div v-else class="p-4">
                     <div class="border-b border-solid pb-4">
-                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                        <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                             Compare
                             <NButton color="#000000" size="small" @click="isEditing = true" ghost>
                                 Back to typo
@@ -90,13 +90,13 @@ const generateDiff = (origin, fixed) => {
                         <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
                     </div>
                     <div class="border-b border-solid py-4">
-                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                        <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                             Fixed
                         </label>
                         <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
                     </div>
                     <div class="border-b border-solid py-4">
-                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
+                        <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                             Your submission
                         </label>
                         <div class="mt-4 text-base leading-7" v-html="origin"></div>

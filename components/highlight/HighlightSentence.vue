@@ -66,7 +66,7 @@ const evaluateStore = useEvaluateStore();
             </n-tag>
         </template>
         <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details"
-             class="flex flex-col space-y-1 py-2 border-b last:border-none">
+             class="flex flex-col border-b py-2 space-y-1 last:border-none">
             <span><span class="font-bold">Issue:</span> {{ detail.issue }}</span>
             <span><span class="font-bold">Idea:</span> {{ detail.idea }}</span>
         </div>
@@ -75,10 +75,10 @@ const evaluateStore = useEvaluateStore();
 
 <style scoped>
 .error_word {
-    @apply inline-block border-b-2 border-red-400 text-red-400 p-0.5 cursor-pointer leading-none;
+    @apply inline-block cursor-pointer border-b-2 border-red-400 leading-none text-red-400 p-0.5;
 }
 
 .error_sentence {
-    @apply inline border-b-2 border-yellow-400 text-yellow-800 p-0.5 cursor-pointer leading-none;
+    @apply inline cursor-pointer border-b-2 border-yellow-400 leading-none text-yellow-800 p-0.5;
 }
 </style>
