@@ -1,6 +1,6 @@
 <script setup>
-import {useTypoStore} from "~/stores/typo.js";
-import {diffChars, diffWords} from "diff";
+import { useTypoStore } from "~/stores/typo.js";
+import { diffChars, diffWords } from "diff";
 
 const showSpin = ref(false);
 const isEditing = ref(true);
@@ -18,7 +18,7 @@ const typoFixed = ref("");
 
 const editorRef = ref(null);
 const handleSubmit = async () => {
-    if (!editorRef.value.getContent()) {
+    if (!editorRef.value.getContent() || editorRef.value.getContent() === "<p></p>") {
         message.error("Submission is required");
         return;
     }
@@ -40,10 +40,10 @@ const handleSubmit = async () => {
         diff.value = response ? generateDiff(response.origin, response.fixed_typos) : [];
         typoFixed.value = diff.value.map((item) => {
             if (item.added) {
-                return `<span class="bg-green-50 px-1 text-green-500">${item.value}</span>`;
+                return `<span class="bg-green-50 px-1 text-green-500">${ item.value }</span>`;
             }
             if (item.removed) {
-                return `<span class="bg-red-50 px-1 text-red-500 line-through">${item.value}</span>`;
+                return `<span class="bg-red-50 px-1 text-red-500 line-through">${ item.value }</span>`;
             }
             return item.value;
         }).join("");
@@ -52,7 +52,7 @@ const handleSubmit = async () => {
                 return ``;
             }
             if (item.removed) {
-                return `<span class="bg-red-50 text-red-500">${item.value}</span>`;
+                return `<span class="bg-red-50 text-red-500">${ item.value }</span>`;
             }
             return item.value;
         }).join("");
