@@ -1,6 +1,6 @@
 <script setup>
-
-import {diffChars, diffWords} from "diff";
+import { useTypoStore } from "~/stores/typo.js";
+import { diffChars, diffWords } from "diff";
 
 const showSpin = ref(false);
 const isEditing = ref(true);
@@ -15,7 +15,14 @@ const fixedTypos = ref("");
 const origin = ref("");
 
 const typoFixed = ref("");
-const handleSubmit = async (content) => {
+
+const editorRef = ref(null);
+const handleSubmit = async () => {
+    if (!editorRef.value.getContent() || editorRef.value.getContent() === "<p></p>") {
+        message.error("Submission is required");
+        return;
+    }
+
     loadingBar.start();
     showSpin.value = true;
     try {
@@ -24,24 +31,31 @@ const handleSubmit = async (content) => {
             body: {
                 id: String(Date.now() * Math.random()),
                 "instruction": "Fix typo",
-                "submission": content,
+                "submission": editorRef.value.getContent(),
                 "keys": []
             },
             retry: 2
         });
         fixedTypos.value = response.fixed_typos;
-        origin.value = response.origin;
         diff.value = response ? generateDiff(response.origin, response.fixed_typos) : [];
         typoFixed.value = diff.value.map((item) => {
             if (item.added) {
-                return `<span class="text-green-500 bg-green-50 px-1">${item.value}</span>`;
+                return `<span class="bg-green-50 px-1 text-green-500">${ item.value }</span>`;
             }
             if (item.removed) {
-                return `<span class="text-red-500 bg-red-50 line-through px-1">${item.value}</span>`;
+                return `<span class="bg-red-50 px-1 text-red-500 line-through">${ item.value }</span>`;
             }
             return item.value;
         }).join("");
-        console.log(typoFixed.value);
+        origin.value = diff.value.map((item) => {
+            if (item.added) {
+                return ``;
+            }
+            if (item.removed) {
+                return `<span class="bg-red-50 text-red-500">${ item.value }</span>`;
+            }
+            return item.value;
+        }).join("");
         isEditing.value = false;
     } catch (error) {
         message.error(error);
@@ -63,44 +77,39 @@ const generateDiff = (origin, fixed) => {
 
 <template>
     <NSpin :show="showSpin">
-        <div class="h-full">
-            <div class="max-w-3xl mx-auto border-x min-h-full">
-                <div class="p-4" v-if="isEditing">
-                    <label class="text-lg font-semibold flex items-center justify-between gap-1">
-                        Fix typo
-                        <n-tooltip trigger="hover">
-                            <template #trigger>
-                                <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
-                            </template>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                        </n-tooltip>
-                    </label>
-                    <div class="mt-4">
-                        <TypoEditor @submit="handleSubmit"/>
-                    </div>
+        <div class="mx-auto max-w-3xl border-x min-h-[calc(100vh-130px)]">
+            <div v-if="isEditing" class="p-4">
+                <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                    Fix typo
+                    <NButton class="px-[20px]" color="#000000" @click="handleSubmit">
+                        Fix
+                    </NButton>
+                </label>
+                <div class="mt-4">
+                    <TypoEditor ref="editorRef"/>
                 </div>
-                <div v-else class="p-4">
-                    <div class="border-b border-solid pb-4">
-                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
-                            Compare
-                            <NButton color="#000000" size="small" @click="isEditing = true" ghost>
-                                Back to typo
-                            </NButton>
-                        </label>
-                        <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
-                    </div>
-                    <div class="border-b border-solid py-4">
-                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
-                            Fixed
-                        </label>
-                        <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
-                    </div>
-                    <div class="border-b border-solid py-4">
-                        <label class="text-lg font-semibold flex items-center justify-between gap-1">
-                            Your submission
-                        </label>
-                        <div class="mt-4 text-base leading-7" v-html="origin"></div>
-                    </div>
+            </div>
+            <div v-else class="">
+                <div class="border-b border-solid p-4">
+                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                        Compare
+                        <NButton color="#000000" size="small" @click="isEditing = true" ghost>
+                            Back to typo
+                        </NButton>
+                    </label>
+                    <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
+                </div>
+                <div class="border-b border-solid p-4">
+                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                        Fixed
+                    </label>
+                    <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
+                </div>
+                <div class="p-4">
+                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                        Your submission
+                    </label>
+                    <div class="mt-4 text-base leading-7" v-html="origin"></div>
                 </div>
             </div>
         </div>

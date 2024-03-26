@@ -27,14 +27,12 @@
                 </n-button>
             </n-space>
         </div>
-        <NButton color="#000000" size="small" @click="submitContent">
-            Fix
-        </NButton>
+
     </div>
 
     <editor-content class="mt-4 text-base" :editor="editor"/>
-    <div class="character-count mt-4 text-xs text-gray-400" v-if="editor">
-        <div class="flex gap-3 justify-end">
+    <div class="mt-4 text-xs text-gray-400 character-count" v-if="editor">
+        <div class="flex justify-end gap-3">
             <NTag size="small"
                   :type="editor.storage.characterCount.characters() >= limitCharacters ? 'error' : 'default'">
                 {{ editor.storage.characterCount.characters() }}/{{ limitCharacters }} characters
@@ -78,12 +76,11 @@ const editor = useEditor({
 
 });
 
-const emit = defineEmits(["submit"]);
-const submitContent = () => {
-    const content = editor.value.getHTML();
-    emit('submit', content);
+const getContent = () =>{
+    return editor.value.getHTML();
 }
 
+defineExpose({getContent})
 </script>
 
 <style scoped lang="scss">

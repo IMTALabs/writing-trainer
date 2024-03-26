@@ -11,7 +11,8 @@ const inputThemeOverrides = {
     border: "none",
     borderHover: "none",
     borderFocus: "none",
-    boxShadowFocus: "none"
+    boxShadowFocus: "none",
+    textColor: "#000000"
 };
 
 // Store
@@ -65,51 +66,56 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-    <NSpin :show="showSpin">
-        <div class="max-w-3xl mx-auto border-x min-h-[calc(100vh-130px)]">
-            <div class="border-b p-4">
-                <label class="text-lg font-semibold flex items-center justify-between gap-1">
-                    Instruction
-                    <NTooltip trigger="hover">
-                        <template #trigger>
-                            <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
-                        </template>
-                        Enter your writing instruction here to make the evaluation process easier
-                    </NTooltip>
-                </label>
-                <NInput
-                    v-model:value="evaluateStore.instruction"
-                    :theme-overrides="inputThemeOverrides"
-                    placeholder="Enter your writing instruction here"
-                    type="textarea"
-                    :autosize="{
+    <div class="flex">
+        <NSpin :show="showSpin" class="grow">
+            <div class="border-r min-h-[calc(100vh-130px)]">
+                <div class="border-b p-4">
+                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                        Instruction
+                        <NTooltip trigger="hover">
+                            <template #trigger>
+                                <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
+                            </template>
+                            Enter your writing instruction here to make the evaluation process easier
+                        </NTooltip>
+                    </label>
+                    <NInput
+                        v-model:value="evaluateStore.instruction"
+                        :theme-overrides="inputThemeOverrides"
+                        placeholder="Enter your writing instruction here"
+                        type="textarea"
+                        :autosize="{
                             minRows: 3,
                             maxRows: 5
                         }"
-                />
-            </div>
-            <div class="p-4">
-                <label class="text-lg font-semibold flex items-center justify-between gap-1 mb-4">
-                    Submission
-                    <NTooltip trigger="hover">
-                        <template #trigger>
-                            <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
-                        </template>
-                        Enter your submission here to evaluate
-                    </NTooltip>
-                </label>
+                    />
+                </div>
+                <div class="p-4">
+                    <div class="mb-4 flex items-center justify-between gap-1 text-lg font-semibold">
+                        Submission
+                        <NTooltip trigger="hover">
+                            <template #trigger>
+                                <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
+                            </template>
+                            Enter your submission here to evaluate
+                        </NTooltip>
+                    </div>
 
-                <EvaluateEditor v-if="isEditing" @submit="handleSubmit"/>
-                <div v-else>
-                    <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost class="mb-4">
-                        Back to edit
-                    </NButton>
-                    <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
-                                        :paragraph="paragraph"/>
+                    <EvaluateEditor v-if="isEditing" @submit="handleSubmit"/>
+                    <div v-else>
+                        <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost class="mb-4">
+                            Back to edit
+                        </NButton>
+                        <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
+                                            :paragraph="paragraph"/>
+                    </div>
                 </div>
             </div>
+        </NSpin>
+        <div class="w-1/3 max-w-xl shrink-0 p-4">
+            <NEmpty description="Enter your instruction and submission to evaluate"></NEmpty>
         </div>
-    </NSpin>
+    </div>
 </template>
 
 <style scoped lang="scss">
