@@ -10,7 +10,10 @@ import Feedback from "~/components/common/Feedback.vue";
             </h1>
             <NaiveIcon class="ml-1" name="ic:outline-mode-edit"/>
         </div>
-        <Feedback/>
+        <div class="flex items-center gap-4">
+            <NuxtLink to="/privacy">Privacy</NuxtLink>
+            <Feedback/>
+        </div>
     </header>
 </template>
 
