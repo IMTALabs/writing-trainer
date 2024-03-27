@@ -66,11 +66,11 @@ const handleValidateClick = () => {
             <template #icon>
                 <NaiveIcon name="ic:baseline-feedback" :size="16"/>
             </template>
-            Feedback
+            {{ $t("Feedback") }}
         </NButton>
 
         <Teleport to="body">
-            <NModal v-model:show="showModal" preset="card" title="Feedback" class="max-w-xl">
+            <NModal v-model:show="showModal" preset="card" :title="$t('Feedback')" class="max-w-xl">
                 <NForm
                     ref="formRef"
                     :label-width="80"
@@ -80,23 +80,23 @@ const handleValidateClick = () => {
                     class="space-y-2"
                 >
                     <NFormItem label="Name" path="user.name">
-                        <NInput v-model:value="formValue.user.name" placeholder="Input Name"/>
+                        <NInput v-model:value="formValue.user.name" :placeholder="$t('Input Name')"/>
                     </NFormItem>
                     <NFormItem label="Email" path="user.email">
-                        <NInput v-model:value="formValue.user.email" placeholder="Input Email"/>
+                        <NInput v-model:value="formValue.user.email" :placeholder="$t('Input Email')"/>
                     </NFormItem>
                     <NFormItem label="Feedback" path="user.feedback">
                         <NInput type="textarea" v-model:value="formValue.user.feedback"
-                                 placeholder="Input Feedback"/>
+                                 :placeholder="$t('Input Feedback')"/>
                     </NFormItem>
                 </NForm>
                 <template #action>
                     <div class="flex justify-end space-x-2">
                         <NButton @click="showModal = false" color="#000000" ghost>
-                            Close
+                            {{ $t("Close")}}
                         </NButton>
                         <NButton @click.prevent="handleValidateClick" color="#000000">
-                            Submit
+                            {{ $t("Submit") }}
                         </NButton>
                     </div>
                 </template>

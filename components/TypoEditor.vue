@@ -35,10 +35,10 @@
         <div class="flex justify-end gap-3">
             <NTag size="small"
                   :type="editor.storage.characterCount.characters() >= limitCharacters ? 'error' : 'default'">
-                {{ editor.storage.characterCount.characters() }}/{{ limitCharacters }} characters
+                {{ editor.storage.characterCount.characters() }}/{{ limitCharacters }} {{  $t("characters") }}
             </NTag>
             <NTag size="small">
-                {{ editor.storage.characterCount.words() }} words
+                {{ editor.storage.characterCount.words() }} {{ $t("words")}}
             </NTag>
         </div>
 
@@ -60,12 +60,14 @@ const content = typoStore.submission;
 
 const limitCharacters = 4000;
 
+const {t} = useI18n();
+
 const editor = useEditor({
     content: content,
     extensions: [
         StarterKit,
         Placeholder.configure({
-            placeholder: "Enter your submission",
+            placeholder: t("Enter your submission here"),
             emptyNodeClass: "my-custom-is-empty-class",
             showOnlyWhenEditable: false
         }),

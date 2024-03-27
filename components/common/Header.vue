@@ -11,8 +11,8 @@ import Feedback from "~/components/common/Feedback.vue";
             <NaiveIcon class="ml-1" name="ic:outline-mode-edit"/>
         </div>
         <div class="flex items-center gap-4">
-            <NuxtLink to="/privacy">Privacy</NuxtLink>
-            <NuxtLink to="/term">Terms of Service</NuxtLink>
+            <NuxtLink to="/privacy">{{ $t("Privacy") }}</NuxtLink>
+            <NuxtLink to="/term">{{ $t("Terms of Service") }}</NuxtLink>
             <Feedback/>
         </div>
     </header>
