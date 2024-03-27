@@ -62,7 +62,7 @@ const evaluateStore = useEvaluateStore();
         </template>
         <template #header>
             <n-tag :bordered="false" type="error" size="small">
-                Word error #{{ sentence?.id }}
+                {{ sentence.type === 'error_word' ? 'Word' : 'Sentence' }} error #{{ sentence?.id }}
             </n-tag>
         </template>
         <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details"
