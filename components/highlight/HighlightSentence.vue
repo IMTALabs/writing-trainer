@@ -67,8 +67,8 @@ const evaluateStore = useEvaluateStore();
         </template>
         <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details"
              class="flex flex-col border-b py-2 space-y-1 last:border-none">
-            <span><span class="font-bold">Issue:</span> {{ detail.issue }}</span>
-            <span><span class="font-bold">Idea:</span> {{ detail.idea }}</span>
+            <span><span class="font-bold">{{ $t("Issue") }}:</span> {{ detail.issue }}</span>
+            <span><span class="font-bold">{{ $t("Idea") }}:</span> {{ detail.idea }}</span>
         </div>
     </NPopover>
 </template>

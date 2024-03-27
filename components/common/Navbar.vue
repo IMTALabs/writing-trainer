@@ -11,7 +11,7 @@
                         <NaiveIcon class="mr-2" name="mdi:marker"/>
                     </n-icon>
                 </template>
-                Essay Assessment
+                {{ $t("Essay Assessment") }}
             </n-button>
         </NuxtLink>
 
@@ -22,7 +22,7 @@
                         <NaiveIcon class="mr-2" name="material-symbols:auto-fix"/>
                     </n-icon>
                 </template>
-                Grammar Checker
+                {{ $t("Grammar Checker") }}
             </n-button>
         </NuxtLink>
     </nav>
@@ -31,6 +31,6 @@
 <style scoped lang="scss">
 // Active link in navbar
 .router-link-exact-active {
-    @apply rounded-md bg-gray-100;
+    @apply rounded-md bg-gray-200;
 }
 </style>
