@@ -27,13 +27,13 @@ export default defineI18nConfig(() => ({
         },
         vi: {
 
-            "Instruction is required": "Yêu cầu hướng dẫn",
-            "Submission is required": "Yêu cầu nộp bài",
-            "Instruction": "Hướng dẫn",
-            "Enter your writing instruction here to make the evaluation process easier": "Nhập hướng dẫn viết của bạn ở đây để quá trình đánh giá dễ dàng hơn",
-            "Submission": "Nộp bài",
-            "Enter your submission here to evaluate": "Nhập bài nộp của bạn ở đây để đánh giá",
-            "Back to edit": "Quay lại chỉnh sửa",
+            "Instruction is required": "Đề bài là bắt buộc",
+            "Submission is required": "Bài làm là bắt buộc",
+            "Instruction": "Đề bài",
+            "Enter your writing instruction here to make the evaluation process easier": "Nhập đề bài của bạn ở đây để làm cho quá trình đánh giá dễ dàng hơn",
+            "Submission": "Bài làm",
+            "Enter your submission here to evaluate": "Nhập bài làm của bạn ở đây để đánh giá",
+            "Back to edit": "Quay lại phần chỉnh sửa",
             "Evaluate": "Đánh giá",
             "characters": "ký tự",
             "words": "từ",
@@ -43,7 +43,7 @@ export default defineI18nConfig(() => ({
             "Privacy": "Quyền riêng tư",
             "Terms of Service": "Điều khoản Dịch vụ",
             "Essay Assessment": "Đánh giá Bài luận",
-            "Grammar Checker": "Kiểm tra ngữ pháp",
+            "Grammar Checker": "Kiểm tra Ngữ pháp",
             "Check": "Kiểm tra",
             "Enter your submission here": "Nộp bài để đánh giá",
             "Word error": "Lỗi từ",
@@ -51,6 +51,7 @@ export default defineI18nConfig(() => ({
             "Issue": "Vấn đề",
             "Idea": "Ý tưởng",
             "Enter your instruction and submission to evaluate": "Nhập đề bài và bài làm để đánh giá",
+            "Enter your writing instruction here": "Nhập đề bài của bạn ở đây",
         }
     }
 }));

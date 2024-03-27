@@ -83,7 +83,7 @@ const handleSubmit = async () => {
                     <NInput
                         v-model:value="evaluateStore.instruction"
                         :theme-overrides="inputThemeOverrides"
-                        placeholder="t('Enter your writing instruction here')"
+                        :placeholder="$t('Enter your writing instruction here')"
                         type="textarea"
                         :autosize="{
                             minRows: 3,
