@@ -56,6 +56,13 @@ const handleValidateClick = () => {
     });
 };
 
+const inputThemeOverrides = {
+    borderHover: "1px solid #000000",
+    borderFocus: "1px solid #000000",
+    boxShadowFocus: "0 0 0 2px rgba(0, 0, 0, 0.2)",
+    textColor: "#000000"
+};
+
 // Hooks
 // ...
 </script>
@@ -80,13 +87,13 @@ const handleValidateClick = () => {
                     class="space-y-2"
                 >
                     <NFormItem label="Name" path="user.name">
-                        <NInput v-model:value="formValue.user.name" :placeholder="$t('Input Name')"/>
+                        <NInput :theme-overrides="inputThemeOverrides" v-model:value="formValue.user.name" :placeholder="$t('Input Name')"/>
                     </NFormItem>
                     <NFormItem label="Email" path="user.email">
-                        <NInput v-model:value="formValue.user.email" :placeholder="$t('Input Email')"/>
+                        <NInput :theme-overrides="inputThemeOverrides" v-model:value="formValue.user.email" :placeholder="$t('Input Email')"/>
                     </NFormItem>
                     <NFormItem label="Feedback" path="user.feedback">
-                        <NInput type="textarea" v-model:value="formValue.user.feedback"
+                        <NInput :theme-overrides="inputThemeOverrides" type="textarea" v-model:value="formValue.user.feedback"
                                  :placeholder="$t('Input Feedback')"/>
                     </NFormItem>
                 </NForm>
