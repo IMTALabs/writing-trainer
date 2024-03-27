@@ -17,9 +17,11 @@ const origin = ref("");
 const typoFixed = ref("");
 
 const editorRef = ref(null);
+
+const {t} = useI18n();
 const handleSubmit = async () => {
     if (!editorRef.value.getContent() || editorRef.value.getContent() === "<p></p>") {
-        message.error("Submission is required");
+        message.error(t("Submission is required"));
         return;
     }
 
@@ -79,12 +81,12 @@ const generateDiff = (origin, fixed) => {
     <NSpin :show="showSpin">
         <div class="mx-auto max-w-3xl border-x min-h-[calc(100vh-130px)]">
             <div v-if="isEditing" class="p-4">
-                <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                    Fix typo
+                <div class="flex items-center justify-between gap-1 text-lg font-semibold">
+                    {{$t("Grammar Checker")}}
                     <NButton class="px-[20px]" color="#000000" @click="handleSubmit">
-                        Fix
+                        {{ $t("Check") }}
                     </NButton>
-                </label>
+                </div>
                 <div class="mt-4">
                     <TypoEditor ref="editorRef"/>
                 </div>
@@ -94,20 +96,20 @@ const generateDiff = (origin, fixed) => {
                     <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                         Compare
                         <NButton color="#000000" size="small" @click="isEditing = true" ghost>
-                            Back to typo
+                            {{ $t("Back to typo") }}
                         </NButton>
                     </label>
                     <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
                 </div>
                 <div class="border-b border-solid p-4">
                     <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                        Fixed
+                        {{ $t("Fixed")}}
                     </label>
                     <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
                 </div>
                 <div class="p-4">
                     <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                        Your submission
+                        {{ $t("Your submission") }}
                     </label>
                     <div class="mt-4 text-base leading-7" v-html="origin"></div>
                 </div>

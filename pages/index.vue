@@ -27,15 +27,17 @@ const highlight = ref(null);
 const message = useMessage();
 const loadingBar = useLoadingBar();
 
+const {t} = useI18n();
+
 // Methods
 const handleSubmit = async () => {
     if (!evaluateStore.instruction) {
-        message.error("Instruction is required");
+        message.error(t("Instruction is required"));
         return;
     }
 
     if (!evaluateStore.submission) {
-        message.error("Submission is required");
+        message.error(t("Submission is required"));
         return;
     }
 
@@ -70,18 +72,18 @@ const handleSubmit = async () => {
         <div class="max-w-3xl mx-auto border-x min-h-[calc(100vh-130px)]">
             <div class="border-b p-4">
                 <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                    Instruction
+                    {{ $t("Instruction") }}
                     <NTooltip trigger="hover">
                         <template #trigger>
                             <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
                         </template>
-                        Enter your writing instruction here to make the evaluation process easier
+                        {{ $t("Enter your writing instruction here to make the evaluation process easier") }}
                     </NTooltip>
                 </label>
                 <NInput
                     v-model:value="evaluateStore.instruction"
                     :theme-overrides="inputThemeOverrides"
-                    placeholder="Enter your writing instruction here"
+                    :placeholder="t('Enter your writing instruction here')"
                     type="textarea"
                     :autosize="{
                             minRows: 3,
@@ -91,19 +93,19 @@ const handleSubmit = async () => {
             </div>
             <div class="p-4">
                 <label class="mb-4 flex items-center justify-between gap-1 text-lg font-semibold">
-                    Submission
+                    {{ $t("Submission") }}
                     <NTooltip trigger="hover">
                         <template #trigger>
                             <NaiveIcon :size="18" class="text-gray-400" name="material-symbols:help"/>
                         </template>
-                        Enter your submission here to evaluate
+                        {{ $t("Enter your submission here to evaluate") }}
                     </NTooltip>
                 </label>
 
                 <EvaluateEditor v-if="isEditing" @submit="handleSubmit"/>
                 <div v-else>
                     <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost class="mb-4">
-                        Back to edit
+                        {{ $t("Back to edit") }}
                     </NButton>
                     <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
                                         :paragraph="paragraph"/>

@@ -1,10 +1,12 @@
 <script setup>
-import { useEditor, EditorContent } from "@tiptap/vue-3";
+import {useEditor, EditorContent} from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
-import { Placeholder } from "@tiptap/extension-placeholder";
+import {Placeholder} from "@tiptap/extension-placeholder";
 
 // Stores
 const evaluateStore = useEvaluateStore();
+
+const {t} = useI18n();
 
 // Composable
 const editor = useEditor({
@@ -12,7 +14,7 @@ const editor = useEditor({
     extensions: [
         StarterKit,
         Placeholder.configure({
-            placeholder: "Enter your submission",
+            placeholder: t("Enter your submission here to evaluate"),
             emptyNodeClass: "my-custom-is-empty-class",
             showOnlyWhenEditable: false
         })
@@ -56,7 +58,7 @@ const submit = () => {
         </div>
 
         <NButton color="#000000" @click="submit">
-            Evaluate
+            {{ $t("Evaluate") }}
         </NButton>
     </div>
 
