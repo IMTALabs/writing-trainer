@@ -2,6 +2,13 @@
 import { useTypoStore } from "~/stores/typo.js";
 import { diffChars, diffWords } from "diff";
 
+const {t} = useI18n();
+
+// Page meta
+useHead({
+    title: t("Grammar Checker")
+});
+
 const showSpin = ref(false);
 const isEditing = ref(true);
 const highlight = ref(null);
@@ -18,7 +25,6 @@ const typoFixed = ref("");
 
 const editorRef = ref(null);
 
-const {t} = useI18n();
 const handleSubmit = async () => {
     if (!editorRef.value.getContent() || editorRef.value.getContent() === "<p></p>") {
         message.error(t("Submission is required"));
