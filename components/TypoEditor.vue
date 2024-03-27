@@ -58,7 +58,7 @@ const typoStore = useTypoStore();
 
 const content = typoStore.submission;
 
-const limitCharacters = 1000;
+const limitCharacters = 4000;
 
 const editor = useEditor({
     content: content,

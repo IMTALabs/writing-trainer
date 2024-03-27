@@ -6,7 +6,7 @@ import Feedback from "~/components/common/Feedback.vue";
     <header class="flex items-center justify-between border-b border-solid p-4">
         <div class="flex items-center">
             <h1 class="m-0 text-xl font-normal">
-                Writing Trainer
+                LAN Trainer
             </h1>
             <NaiveIcon class="ml-1" name="ic:outline-mode-edit"/>
         </div>
