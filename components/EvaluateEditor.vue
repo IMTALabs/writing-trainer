@@ -12,7 +12,7 @@ const editor = useEditor({
     extensions: [
         StarterKit,
         Placeholder.configure({
-            placeholder: "Enter your submission",
+            placeholder: "Enter your submission here to evaluate",
             emptyNodeClass: "my-custom-is-empty-class",
             showOnlyWhenEditable: false
         })

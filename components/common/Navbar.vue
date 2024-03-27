@@ -11,7 +11,7 @@
                         <NaiveIcon class="mr-2" name="mdi:marker"/>
                     </n-icon>
                 </template>
-                Evaluate
+                Essay Assessment
             </n-button>
         </NuxtLink>
 
@@ -22,7 +22,7 @@
                         <NaiveIcon class="mr-2" name="material-symbols:auto-fix"/>
                     </n-icon>
                 </template>
-                Fix typo
+                Grammar Checker
             </n-button>
         </NuxtLink>
     </nav>

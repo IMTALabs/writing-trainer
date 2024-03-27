@@ -35,8 +35,8 @@
                 vậy, cha mẹ hoặc người giám hộ hợp pháp của bạn phải đồng ý với các Điều khoản Dịch vụ LAN Trainer và
                 xác nhận rằng họ chấp nhận các Điều khoản này thay bạn và chịu trách nhiệm cho việc sử dụng của bạn. Các
                 kết quả do LAN Trainer trả về có thể không phù hợp với trẻ em. Nếu bạn đang chấp nhận các Điều khoản
-                Dịch vụ LAN Trainer này thay cho ai đó hoặc một thực thể, bạn xác nhận rằng bạn có quyền lực pháp lý để
-                ràng buộc người đó hoặc thực thể đó vào các Điều khoản này.</span>
+                Dịch vụ LAN Trainer này thay cho ai đó hoặc một thực thể, bạn xác nhận rằng bạn có năng lực pháp lý để
+                ràng buộc người đó hoặc thực thể đó vào các điều khoản này.</span>
         </p>
         <p>
             <span style="color:#0d0d0d;">3. Điều khoản sử dụng&nbsp;</span>

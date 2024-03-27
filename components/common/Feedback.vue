@@ -85,7 +85,7 @@ const handleValidateClick = () => {
                     <NFormItem label="Email" path="user.email">
                         <NInput v-model:value="formValue.user.email" placeholder="Input Email"/>
                     </NFormItem>
-                    <NFormItem label="Email" path="user.feedback">
+                    <NFormItem label="Feedback" path="user.feedback">
                         <NInput type="textarea" v-model:value="formValue.user.feedback"
                                  placeholder="Input Feedback"/>
                     </NFormItem>

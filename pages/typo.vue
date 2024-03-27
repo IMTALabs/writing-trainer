@@ -80,9 +80,9 @@ const generateDiff = (origin, fixed) => {
         <div class="mx-auto max-w-3xl border-x min-h-[calc(100vh-130px)]">
             <div v-if="isEditing" class="p-4">
                 <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                    Fix typo
+                    Grammar Checker
                     <NButton class="px-[20px]" color="#000000" @click="handleSubmit">
-                        Fix
+                        Check
                     </NButton>
                 </label>
                 <div class="mt-4">
