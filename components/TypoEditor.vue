@@ -79,6 +79,7 @@ const editor = useEditor({
 });
 
 const getContent = () =>{
+    typoStore.setSubmission(editor.value.getHTML());
     return editor.value.getHTML();
 }
 

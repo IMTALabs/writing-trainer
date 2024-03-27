@@ -51,7 +51,7 @@ const handleSubmit = async () => {
                 return `<span class="bg-green-50 px-1 text-green-500">${ item.value }</span>`;
             }
             if (item.removed) {
-                return `<span class="bg-red-50 px-1 text-red-500 line-through">${ item.value }</span>`;
+                return ``;
             }
             return item.value;
         }).join("");
@@ -85,7 +85,7 @@ const generateDiff = (origin, fixed) => {
 
 <template>
     <NSpin :show="showSpin">
-        <div class="mx-auto max-w-3xl border-x min-h-[calc(100vh-130px)]">
+        <div class="mx-auto max-w-5xl border-x min-h-[calc(100vh-130px)]">
             <div v-if="isEditing" class="p-4">
                 <div class="flex items-center justify-between gap-1 text-lg font-semibold">
                     {{$t("Grammar Checker")}}
@@ -98,27 +98,30 @@ const generateDiff = (origin, fixed) => {
                 </div>
             </div>
             <div v-else class="">
-                <div class="border-b border-solid p-4">
-                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                        Compare
-                        <NButton color="#000000" size="small" @click="isEditing = true" ghost>
-                            {{ $t("Back to typo") }}
-                        </NButton>
-                    </label>
-                    <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
-                </div>
-                <div class="border-b border-solid p-4">
-                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                        {{ $t("Fixed")}}
-                    </label>
-                    <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
+                <div class="flex border-b border-solid">
+                    <div class="w-1/2 border-r border-solid p-4">
+                        <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                            {{ $t("Your submission") }}
+                        </label>
+                        <div class="mt-4 text-base leading-7" v-html="origin"></div>
+                    </div>
+                    <div class=" w-1/2 p-4">
+                        <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                            {{ $t("Suggestion") }}
+                        </label>
+                        <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
+                    </div>
                 </div>
                 <div class="p-4">
-                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
-                        {{ $t("Your submission") }}
-                    </label>
-                    <div class="mt-4 text-base leading-7" v-html="origin"></div>
+                    <div class="flex items-center justify-between gap-1 text-lg font-semibold">
+                        {{ $t("Final Result") }}
+                        <NButton color="#000000" size="small" @click="isEditing = true" ghost>
+                            {{ $t("Back to checker") }}
+                        </NButton>
+                    </div>
+                    <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
                 </div>
+
             </div>
         </div>
     </NSpin>
