@@ -1,9 +1,10 @@
 <script setup>
 import EvaluateEditor from "~/components/EvaluateEditor.vue";
 
+const {t} = useI18n();
 // Page meta
 useHead({
-    title: "Homepage"
+    title: t("Essay Assessment")
 });
 
 // Theme overrides
@@ -26,8 +27,6 @@ const highlight = ref(null);
 // Composable
 const message = useMessage();
 const loadingBar = useLoadingBar();
-
-const {t} = useI18n();
 
 // Methods
 const handleSubmit = async () => {
