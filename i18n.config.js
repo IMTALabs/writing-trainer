@@ -44,7 +44,12 @@ export default defineI18nConfig(() => ({
             "Essay Assessment": "Đánh giá Bài luận",
             "Grammar Checker": "Kiểm tra ngữ pháp",
             "Check": "Kiểm tra",
-            "Enter your submission here": "Nộp bài để đánh giá"
+            "Enter your submission here": "Nộp bài để đánh giá",
+            "Word error": "Lỗi từ",
+            "Sentence error": "Lỗi câu",
+            "Issue": "Vấn đề",
+            "Idea": "Ý tưởng",
+            "Enter your instruction and submission to evaluate": "Nhập đề bài và bài làm để đánh giá",
         }
     }
 }));

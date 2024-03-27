@@ -31,6 +31,6 @@
 <style scoped lang="scss">
 // Active link in navbar
 .router-link-exact-active {
-    @apply rounded-md bg-gray-100;
+    @apply rounded-md bg-gray-200;
 }
 </style>

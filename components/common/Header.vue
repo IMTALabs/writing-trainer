@@ -8,7 +8,6 @@ import Feedback from "~/components/common/Feedback.vue";
             <h1 class="m-0 text-xl font-normal">
                 LAN Trainer
             </h1>
-            <NaiveIcon class="ml-1" name="ic:outline-mode-edit"/>
         </div>
         <div class="flex items-center gap-4">
             <NuxtLink to="/privacy">{{ $t("Privacy") }}</NuxtLink>
