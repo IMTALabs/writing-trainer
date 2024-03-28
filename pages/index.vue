@@ -1,7 +1,7 @@
 <script setup>
 import EvaluateEditor from "~/components/EvaluateEditor.vue";
 
-const {t} = useI18n();
+const { t } = useI18n();
 // Page meta
 useHead({
     title: t("Essay Assessment")
@@ -22,7 +22,6 @@ const evaluateStore = useEvaluateStore();
 // Data
 const showSpin = ref(false);
 const isEditing = ref(true);
-const highlight = ref(null);
 
 // Composable
 const message = useMessage();
@@ -64,12 +63,20 @@ const handleSubmit = async () => {
         showSpin.value = false;
     }
 };
+
+const headerClick = (data) => {
+    if (data.expanded) {
+        evaluateStore.setHighlighting([data.name]);
+    } else {
+        evaluateStore.setHighlighting([]);
+    }
+};
 </script>
 
 <template>
     <NSpin :show="showSpin">
         <div class="flex">
-            <div class="border-r min-h-[calc(100vh-130px)] grow">
+            <div class="border-r h-[calc(100vh-130px)] grow overflow-y-auto">
                 <div class="border-b p-4">
                     <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                         {{ $t("Instruction") }}
@@ -112,11 +119,11 @@ const handleSubmit = async () => {
                     </div>
                 </div>
             </div>
-            <div class="w-1/3 max-w-xl shrink-0 p-4">
+            <div class="w-1/3 max-w-xl h-[calc(100vh-130px)] shrink-0 p-4 overflow-y-auto">
                 <NEmpty v-if="evaluateStore.badParts.length < 1"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
                 <div v-else>
-                    <NCollapse accordion>
+                    <NCollapse :expanded-names="evaluateStore.highlighting" @item-header-click="headerClick">
                         <NCollapseItem v-for="(part, idx) in evaluateStore.badParts" :name="`error-${idx}`">
                             <template #arrow>
                                 <NaiveIcon name="material-symbols:arrow-forward-ios-rounded" :size="14"/>
@@ -130,9 +137,12 @@ const handleSubmit = async () => {
                                 # {{ part.id }}
                             </template>
 
-                            <div class="flex flex-col border-b last:border-0 py-2 last:pb-0 mb-2 last:mb-0 leading-6" v-for="detail in part.details">
-                                <div class="flex gap-1 mb-2">
-                                    <div v-for="i in detail.serious_level" class="w-4 h-2 rounded-sm"
+                            <div class="w-fit border bg-gray-50 px-2 leading-6 py-0.5">"{{ part.text }}"</div>
+
+                            <div class="my-2 flex flex-col border-b py-2 leading-6 last:mb-0 last:border-0 last:pb-0"
+                                 v-for="detail in part.details">
+                                <div class="mb-2 flex gap-1">
+                                    <div v-for="i in detail.serious_level" class="h-2 w-4 rounded-sm"
                                          :class="detail.serious_level >= 3 ? 'bg-red-500' : 'bg-yellow-500'"></div>
                                 </div>
                                 <span><strong>Issue: </strong>{{ detail.issue }}</span>

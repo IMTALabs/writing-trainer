@@ -1,6 +1,6 @@
 export default defineI18nConfig(() => ({
     legacy: false,
-    locales: ['en', 'vi'],
+    locales: ["en", "vi"],
     locale: "vi",
     messages: {
         en: {
@@ -52,6 +52,14 @@ export default defineI18nConfig(() => ({
             "Idea": "Ý tưởng",
             "Enter your instruction and submission to evaluate": "Nhập đề bài và bài làm để đánh giá",
             "Enter your writing instruction here": "Nhập đề bài của bạn ở đây",
+            "Please input your name": "Vui lòng nhập tên của bạn",
+            "Please input your email": "Vui lòng nhập email của bạn",
+            "Please input your feedback": "Vui lòng nhập phản hồi của bạn",
+            "Invalid email": "Email không hợp lệ",
+            "Name": "Tên",
+            "Input Name": "Nhập tên",
+            "Input Email": "Nhập email",
+            "Input Feedback": "Nhập phản hồi"
         }
     }
 }));

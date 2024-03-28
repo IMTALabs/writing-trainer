@@ -4,6 +4,7 @@
 
 // Composable
 const message = useMessage();
+const { t } = useI18n();
 
 // Props
 //...
@@ -22,17 +23,24 @@ const rules = ref({
     user: {
         name: {
             required: true,
-            message: "Please input your name",
+            message: t("Please input your name"),
             trigger: "blur"
         },
         email: {
             required: true,
-            message: "Please input your email",
+            validator(rule, value) {
+                if (!value) {
+                    return new Error(t("Please input your email"));
+                } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)) {
+                    return new Error(t("Invalid email"));
+                }
+                return true;
+            },
             trigger: ["input", "blur"]
         },
         feedback: {
             required: true,
-            message: "Please input your feedback",
+            message: t("Please input your feedback"),
             trigger: "blur"
         }
     }
@@ -84,15 +92,15 @@ const inputThemeOverrides = {
                     :model="formValue"
                     :rules="rules"
                     size="medium"
-                    class="space-y-2"
+                    class="space-y-3"
                 >
-                    <NFormItem label="Name" path="user.name">
+                    <NFormItem :label="$t('Name')" path="user.name">
                         <NInput :theme-overrides="inputThemeOverrides" v-model:value="formValue.user.name" :placeholder="$t('Input Name')"/>
                     </NFormItem>
                     <NFormItem label="Email" path="user.email">
                         <NInput :theme-overrides="inputThemeOverrides" v-model:value="formValue.user.email" :placeholder="$t('Input Email')"/>
                     </NFormItem>
-                    <NFormItem label="Feedback" path="user.feedback">
+                    <NFormItem :label="$t('Feedback')" path="user.feedback">
                         <NInput :theme-overrides="inputThemeOverrides" type="textarea" v-model:value="formValue.user.feedback"
                                  :placeholder="$t('Input Feedback')"/>
                     </NFormItem>
