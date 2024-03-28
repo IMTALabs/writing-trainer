@@ -53,7 +53,8 @@ const evaluateStore = useEvaluateStore();
 <template>
     <NPopover trigger="manual" style="max-width: 360px" :show="isShow" :show-arrow="false">
         <template #trigger>
-            <span :class="sentence?.type" @mouseleave="isShow = false" @mousemove.stop="showUp">
+            <span :class="sentence?.type" @mouseleave="isShow = false" @mousemove.stop="showUp"
+                  @click.stop="evaluateStore.setHighlighting([`error-${sentence?.id}`])">
                 <template v-for="token in tokens">
                     <span v-if="typeof token === 'string'" v-html="token"/>
                     <HighlightSentence v-else :sentence="token" @child-up="childUp"/>
@@ -62,7 +63,7 @@ const evaluateStore = useEvaluateStore();
         </template>
         <template #header>
             <n-tag :bordered="false" type="error" size="small">
-                {{ sentence.type === 'error_word' ? 'Word' : 'Sentence' }} error #{{ sentence?.id }}
+                {{ sentence.type === "error_word" ? "Word" : "Sentence" }} error #{{ sentence?.id }}
             </n-tag>
         </template>
         <div v-for="detail in evaluateStore.badParts.find((bp) => bp.id === sentence?.id)?.details"
