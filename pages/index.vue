@@ -56,7 +56,11 @@ const handleSubmit = async () => {
         });
         evaluateStore.setHighlight(response.display_errors.highlight);
         evaluateStore.setBadParts(response.display_errors.bad_parts);
-        isEditing.value = false;
+        if (evaluateStore.badParts.length === 0) {
+            message.success(t("No errors found"));
+        } else {
+            isEditing.value = false;
+        }
     } catch (error) {
         console.log(error);
         message.error(error);
@@ -74,21 +78,19 @@ const headerClick = (data) => {
     }
 };
 
-evaluateStore.$subscribe(async (mutation, state) => {
-    if (mutation.events.key === "highlighting") {
-        const needleId = mutation.events.newValue[mutation.events.newValue.length - 1];
-        if (needleId) {
-            const needleErrorEl = document.getElementById(needleId);
-            if (needleErrorEl) {
-                setTimeout(() => {
-                    const childRect = needleErrorEl.getBoundingClientRect();
-                    const parentRect = errorScroll.value.getBoundingClientRect();
-                    errorScroll.value.scroll({
-                        top: needleId === "error-0" ? 0 : (childRect.top - parentRect.top + errorScroll.value.scrollTop),
-                        behavior: "smooth"
-                    });
-                }, 500);
-            }
+watch(() => evaluateStore.highlighting, () => {
+    const needleId = evaluateStore.highlighting[evaluateStore.highlighting.length - 1];
+    if (needleId) {
+        const needleErrorEl = document.getElementById(needleId);
+        if (needleErrorEl) {
+            setTimeout(() => {
+                const childRect = needleErrorEl.getBoundingClientRect();
+                const parentRect = errorScroll.value.getBoundingClientRect();
+                errorScroll.value.scroll({
+                    top: needleId === "error-0" ? 0 : (childRect.top - parentRect.top + errorScroll.value.scrollTop),
+                    behavior: "smooth"
+                });
+            }, 500);
         }
     }
 });
