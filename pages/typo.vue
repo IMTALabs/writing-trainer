@@ -9,6 +9,13 @@ definePageMeta({
     title: "Grammar Checker"
 });
 
+defineOgImageComponent("NuxtSeo", {
+    title: t("Grammar Checker"),
+    description: t("Check your grammar with ease"),
+    theme: "#ff0000",
+    colorMode: "dark"
+});
+
 const showSpin = ref(false);
 const isEditing = ref(true);
 const highlight = ref(null);

@@ -58,7 +58,6 @@ const handleValidateClick = () => {
         if (!errors) {
             message.success("Thanks for your feedback!");
         } else {
-            console.log(errors);
             message.error("Invalid");
         }
     });

@@ -11,6 +11,13 @@ definePageMeta({
     title: "Essay Assessment"
 });
 
+defineOgImageComponent("NuxtSeo", {
+    title: t("Essay Assessment"),
+    description: t("Evaluate your essay with ease"),
+    theme: "#ff0000",
+    colorMode: "dark"
+});
+
 // Theme overrides
 const inputThemeOverrides = {
     border: "none",
@@ -62,7 +69,6 @@ const handleSubmit = async () => {
             isEditing.value = false;
         }
     } catch (error) {
-        console.log(error);
         message.error(error);
     } finally {
         loadingBar.finish();
