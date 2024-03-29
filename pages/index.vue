@@ -1,10 +1,14 @@
 <script setup>
 import EvaluateEditor from "~/components/EvaluateEditor.vue";
 
+// Composable
+const message = useMessage();
+const loadingBar = useLoadingBar();
 const { t } = useI18n();
+
 // Page meta
-useHead({
-    title: t("Essay Assessment")
+definePageMeta({
+    title: "Essay Assessment"
 });
 
 // Theme overrides
@@ -22,10 +26,7 @@ const evaluateStore = useEvaluateStore();
 // Data
 const showSpin = ref(false);
 const isEditing = ref(true);
-
-// Composable
-const message = useMessage();
-const loadingBar = useLoadingBar();
+const errorScroll = ref(null);
 
 // Methods
 const handleSubmit = async () => {
@@ -57,6 +58,7 @@ const handleSubmit = async () => {
         evaluateStore.setBadParts(response.display_errors.bad_parts);
         isEditing.value = false;
     } catch (error) {
+        console.log(error);
         message.error(error);
     } finally {
         loadingBar.finish();
@@ -71,6 +73,25 @@ const headerClick = (data) => {
         evaluateStore.setHighlighting([]);
     }
 };
+
+evaluateStore.$subscribe(async (mutation, state) => {
+    if (mutation.events.key === "highlighting") {
+        const needleId = mutation.events.newValue[mutation.events.newValue.length - 1];
+        if (needleId) {
+            const needleErrorEl = document.getElementById(needleId);
+            if (needleErrorEl) {
+                setTimeout(() => {
+                    const childRect = needleErrorEl.getBoundingClientRect();
+                    const parentRect = errorScroll.value.getBoundingClientRect();
+                    errorScroll.value.scroll({
+                        top: needleId === "error-0" ? 0 : (childRect.top - parentRect.top + errorScroll.value.scrollTop),
+                        behavior: "smooth"
+                    });
+                }, 500);
+            }
+        }
+    }
+});
 </script>
 
 <template>
@@ -119,12 +140,13 @@ const headerClick = (data) => {
                     </div>
                 </div>
             </div>
-            <div class="w-1/3 max-w-xl h-[calc(100vh-130px)] shrink-0 p-4 overflow-y-auto">
+            <div class="w-1/3 max-w-xl h-[calc(100vh-130px)] shrink-0 p-4 overflow-y-auto" ref="errorScroll">
                 <NEmpty v-if="evaluateStore.badParts.length < 1"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
                 <div v-else>
                     <NCollapse :expanded-names="evaluateStore.highlighting" @item-header-click="headerClick">
-                        <NCollapseItem v-for="(part, idx) in evaluateStore.badParts" :name="`error-${idx}`">
+                        <NCollapseItem v-for="(part, idx) in evaluateStore.badParts" :name="`error-${idx}`"
+                                       :id="`error-${idx}`">
                             <template #arrow>
                                 <NaiveIcon name="material-symbols:arrow-forward-ios-rounded" :size="14"/>
                             </template>

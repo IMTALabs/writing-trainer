@@ -5,8 +5,8 @@ import { diffChars, diffWords } from "diff";
 const {t} = useI18n();
 
 // Page meta
-useHead({
-    title: t("Grammar Checker")
+definePageMeta({
+    title: "Grammar Checker"
 });
 
 const showSpin = ref(false);

@@ -1,7 +1,9 @@
 export default defineI18nConfig(() => ({
     legacy: false,
     locales: ["en", "vi"],
+    defaultLocale: "vi",
     locale: "vi",
+    strategy: "no_prefix",
     messages: {
         en: {
             "Terms of Service": "Terms of Service",
@@ -23,10 +25,24 @@ export default defineI18nConfig(() => ({
             "Essay Assessment": "Essay Assessment",
             "Grammar Checker": "Grammar Checker",
             "Check": "Check",
-            "Enter your submission here": "Enter your submission here"
+            "Enter your submission here": "Enter your submission here",
+            "Word error": "Word error",
+            "Sentence error": "Sentence error",
+            "Issue": "Issue",
+            "Idea": "Idea",
+            "Enter your instruction and submission to evaluate": "Enter your instruction and submission to evaluate",
+            "Enter your writing instruction here": "Enter your writing instruction here",
+            "Please input your name": "Please input your name",
+            "Please input your email": "Please input your email",
+            "Please input your feedback": "Please input your feedback",
+            "Invalid email": "Invalid email",
+            "Name": "Name",
+            "Input Name": "Input Name",
+            "Input Email": "Input Email",
+            "Input Feedback": "Input Feedback",
+            "LAN Trainer": "LAN Trainer"
         },
         vi: {
-
             "Instruction is required": "Đề bài là bắt buộc",
             "Submission is required": "Bài làm là bắt buộc",
             "Instruction": "Đề bài",
@@ -59,7 +75,8 @@ export default defineI18nConfig(() => ({
             "Name": "Tên",
             "Input Name": "Nhập tên",
             "Input Email": "Nhập email",
-            "Input Feedback": "Nhập phản hồi"
+            "Input Feedback": "Nhập phản hồi",
+            "LAN Trainer": "LAN Trainer"
         }
     }
 }));

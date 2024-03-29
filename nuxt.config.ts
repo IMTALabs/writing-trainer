@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     },
     css: ["~/assets/scss/main.scss"],
     i18n: {
-        vueI18n: "./i18n.config.js"
+        vueI18n: "./i18n.config.js",
+        baseUrl: "http://localhost:3000"
     }
 });
