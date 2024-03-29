@@ -96,7 +96,7 @@ watch(() => evaluateStore.highlighting, () => {
                     top: needleId === "error-0" ? 0 : (childRect.top - parentRect.top + errorScroll.value.scrollTop),
                     behavior: "smooth"
                 });
-            }, 500);
+            }, 200);
         }
     }
 });
