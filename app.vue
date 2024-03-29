@@ -1,9 +1,11 @@
 <script setup>
 import { lightTheme } from "naive-ui";
 
+const { t } = useI18n();
+
 useHead({
     titleTemplate: (titleChunk) => {
-        return titleChunk ? `${ titleChunk } - Writing Trainer` : "Writing Trainer";
+        return titleChunk ? `${ titleChunk } - LAN Trainer` : "LAN Trainer";
     },
     meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" }

@@ -1,3 +1,10 @@
+<script setup>
+// Page meta
+definePageMeta({
+    title: "Privacy"
+});
+</script>
+
 <template>
     <div class="max-w-3xl mx-auto space-y-4 my-8 text-justify">
         <p>

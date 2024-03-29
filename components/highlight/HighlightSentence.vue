@@ -76,7 +76,7 @@ const evaluateStore = useEvaluateStore();
 
 <style scoped>
 .error_word {
-    @apply inline-block cursor-pointer border-b-2 border-red-400 leading-none text-red-400 p-0.5;
+    @apply inline cursor-pointer border-b-2 border-red-400 leading-none text-red-400 p-0.5;
 }
 
 .error_sentence {
