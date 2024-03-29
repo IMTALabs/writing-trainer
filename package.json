@@ -16,6 +16,7 @@
     "@tiptap/pm": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
     "@tiptap/vue-3": "^2.2.4",
+    "@vercel/analytics": "^1.2.2",
     "diff": "^5.2.0",
     "nuxt": "^3.11.1",
     "pinia": "^2.1.7",
