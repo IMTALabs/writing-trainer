@@ -1,7 +1,10 @@
 <script setup>
 import { lightTheme } from "naive-ui";
 
+const route = useRoute();
 const { t } = useI18n();
+
+const title = computed(() => t(route.meta.title));
 
 useHead({
     titleTemplate: (titleChunk) => {
@@ -9,13 +12,6 @@ useHead({
     },
     meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" }
-    ],
-    link: [
-        {
-            rel: "icon",
-            type: "image/png",
-            href: "favicon.png"
-        }
     ]
 });
 
@@ -36,6 +32,10 @@ const themeOverrides = {
 </script>
 
 <template>
+    <Head>
+        <Title>{{ title }}</Title>
+    </Head>
+
     <NaiveConfig>
         <NConfigProvider :theme="lightTheme" :theme-overrides="themeOverrides">
             <NMessageProvider>
