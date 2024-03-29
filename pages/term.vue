@@ -1,12 +1,21 @@
 <script setup>
+const {t} = useI18n();
+
 // Page meta
 definePageMeta({
     title: "Terms of Service"
 });
+
+defineOgImageComponent("NuxtSeo", {
+    title: t("Terms of Service"),
+    description: t("Terms of Service of LAN Trainer"),
+    theme: "#ff0000",
+    colorMode: "dark"
+});
 </script>
 
 <template>
-    <div class="max-w-3xl mx-auto space-y-4 my-8 text-justify">
+    <div class="max-w-3xl mx-auto space-y-4 my-8 px-4 text-justify">
         <p>
             <span style="color:#0d0d0d;" class="text-lg font-bold">Chào mừng bạn đến với LAN Trainer!</span>
         </p>

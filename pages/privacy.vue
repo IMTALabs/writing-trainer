@@ -1,12 +1,21 @@
 <script setup>
+const {t} = useI18n();
+
 // Page meta
 definePageMeta({
     title: "Privacy"
 });
+
+defineOgImageComponent("NuxtSeo", {
+    title: t("Privacy"),
+    description: t("Privacy Policy of LAN Trainer"),
+    theme: "#ff0000",
+    colorMode: "dark"
+});
 </script>
 
 <template>
-    <div class="max-w-3xl mx-auto space-y-4 my-8 text-justify">
+    <div class="max-w-3xl mx-auto space-y-4 my-8 px-4 text-justify">
         <p>
             <span>Chính sách Bảo mật LAN Trainer này ("Chính sách Bảo mật") mô tả cách
                 thông tin cá nhân của bạn được xử lý khi bạn sử dụng LAN Trainer, một nền tảng cho phép bạn học ngôn ngữ

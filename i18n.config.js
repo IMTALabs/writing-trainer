@@ -1,8 +1,8 @@
 export default defineI18nConfig(() => ({
     legacy: false,
     locales: ["en", "vi"],
-    defaultLocale: "vi",
-    locale: "vi",
+    defaultLocale: "en",
+    locale: "en",
     strategy: "no_prefix",
     messages: {
         en: {
@@ -41,7 +41,9 @@ export default defineI18nConfig(() => ({
             "Input Email": "Input Email",
             "Input Feedback": "Input Feedback",
             "LAN Trainer": "LAN Trainer",
-            "No errors found": "No errors found"
+            "No errors found": "No errors found",
+            "A platform for learning and improving your English skills.": "A platform for learning and improving your English skills.",
+            "Evaluate your essay with ease": "Evaluate your essay with ease"
         },
         vi: {
             "Instruction is required": "Đề bài là bắt buộc",
@@ -78,7 +80,9 @@ export default defineI18nConfig(() => ({
             "Input Email": "Nhập email",
             "Input Feedback": "Nhập phản hồi",
             "LAN Trainer": "LAN Trainer",
-            "No errors found": "Không tìm thấy lỗi"
+            "No errors found": "Không tìm thấy lỗi",
+            "A platform for learning and improving your English skills.": "Một nền tảng để học và cải thiện kỹ năng của Tiếng Anh bạn.",
+            "Evaluate your essay with ease": "Đánh giá bài luận của bạn một cách dễ dàng"
         }
     }
 }));
