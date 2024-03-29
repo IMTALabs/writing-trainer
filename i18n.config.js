@@ -40,7 +40,8 @@ export default defineI18nConfig(() => ({
             "Input Name": "Input Name",
             "Input Email": "Input Email",
             "Input Feedback": "Input Feedback",
-            "LAN Trainer": "LAN Trainer"
+            "LAN Trainer": "LAN Trainer",
+            "No errors found": "No errors found"
         },
         vi: {
             "Instruction is required": "Đề bài là bắt buộc",
@@ -76,7 +77,8 @@ export default defineI18nConfig(() => ({
             "Input Name": "Nhập tên",
             "Input Email": "Nhập email",
             "Input Feedback": "Nhập phản hồi",
-            "LAN Trainer": "LAN Trainer"
+            "LAN Trainer": "LAN Trainer",
+            "No errors found": "Không tìm thấy lỗi"
         }
     }
 }));
