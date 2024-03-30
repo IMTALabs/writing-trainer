@@ -25,6 +25,28 @@
                 {{ $t("Grammar Checker") }}
             </n-button>
         </NuxtLink>
+
+        <NuxtLink to="/coming-soon" class="px-2">
+            <n-button text>
+                <template #icon>
+                    <n-icon>
+                        <NaiveIcon class="mr-2" name="ri:character-recognition-fill"/>
+                    </n-icon>
+                </template>
+                {{ $t("Vocab Trainer") }}
+            </n-button>
+        </NuxtLink>
+
+        <NuxtLink to="/coming-soon" class="px-2">
+            <n-button text>
+                <template #icon>
+                    <n-icon>
+                        <NaiveIcon class="mr-2" name="icon-park-solid:writing-fluently"/>
+                    </n-icon>
+                </template>
+                {{ $t("Dictation") }}
+            </n-button>
+        </NuxtLink>
     </nav>
 </template>
 

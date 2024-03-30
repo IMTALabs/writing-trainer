@@ -1,9 +1,4 @@
 export default defineI18nConfig(() => ({
-    legacy: false,
-    locales: ["en", "vi"],
-    defaultLocale: "en",
-    locale: "en",
-    strategy: "no_prefix",
     messages: {
         en: {
             "Terms of Service": "Terms of Service",
@@ -43,7 +38,10 @@ export default defineI18nConfig(() => ({
             "LAN Trainer": "LAN Trainer",
             "No errors found": "No errors found",
             "A platform for learning and improving your English skills.": "A platform for learning and improving your English skills.",
-            "Evaluate your essay with ease": "Evaluate your essay with ease"
+            "Evaluate your essay with ease": "Evaluate your essay with ease",
+            "Vocab Trainer": "Vocab Trainer",
+            "Dictation": "Dictation",
+            "Coming soon": "Coming soon"
         },
         vi: {
             "Instruction is required": "Đề bài là bắt buộc",
@@ -82,7 +80,10 @@ export default defineI18nConfig(() => ({
             "LAN Trainer": "LAN Trainer",
             "No errors found": "Không tìm thấy lỗi",
             "A platform for learning and improving your English skills.": "Một nền tảng để học và cải thiện kỹ năng của Tiếng Anh bạn.",
-            "Evaluate your essay with ease": "Đánh giá bài luận của bạn một cách dễ dàng"
+            "Evaluate your essay with ease": "Đánh giá bài luận của bạn một cách dễ dàng",
+            "Vocab Trainer": "Luyện từ vựng",
+            "Dictation": "Chép chính tả",
+            "Coming soon": "Sắp ra mắt"
         }
     }
 }));
