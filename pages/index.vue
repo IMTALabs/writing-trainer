@@ -51,6 +51,8 @@ const handleSubmit = async () => {
     showSpin.value = true;
 
     try {
+        message.info(t("Evaluating ..."));
+
         const response = await $fetch("https://8800.imta-chatbot.online/generate_errors", {
             method: "POST",
             body: {
@@ -87,17 +89,7 @@ const headerClick = (data) => {
 watch(() => evaluateStore.highlighting, () => {
     const needleId = evaluateStore.highlighting[evaluateStore.highlighting.length - 1];
     if (needleId) {
-        const needleErrorEl = document.getElementById(needleId);
-        if (needleErrorEl) {
-            setTimeout(() => {
-                const childRect = needleErrorEl.getBoundingClientRect();
-                const parentRect = errorScroll.value.getBoundingClientRect();
-                errorScroll.value.scroll({
-                    top: needleId === "error-0" ? 0 : (childRect.top - parentRect.top + errorScroll.value.scrollTop),
-                    behavior: "smooth"
-                });
-            }, 200);
-        }
+        message.info(t("Focus mode is in progress! Coming soon!"));
     }
 });
 </script>
@@ -105,7 +97,7 @@ watch(() => evaluateStore.highlighting, () => {
 <template>
     <NSpin :show="showSpin">
         <div class="flex">
-            <div class="border-r h-[calc(100vh-130px)] grow overflow-y-auto">
+            <NScrollbar class="border-r grow h-[calc(100vh-130px)]">
                 <div class="border-b p-4">
                     <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                         {{ $t("Instruction") }}
@@ -147,40 +139,34 @@ watch(() => evaluateStore.highlighting, () => {
                                             :paragraph="paragraph"/>
                     </div>
                 </div>
-            </div>
-            <div class="w-1/3 max-w-xl h-[calc(100vh-130px)] shrink-0 p-4 overflow-y-auto" ref="errorScroll">
+            </NScrollbar>
+
+            <div class="w-1/3 max-w-xl shrink-0 p-4 h-[calc(100vh-130px)] overflow-y-auto" ref="errorScroll">
                 <NEmpty v-if="evaluateStore.badParts.length < 1"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
-                <div v-else>
-                    <NCollapse :expanded-names="evaluateStore.highlighting" @item-header-click="headerClick">
-                        <NCollapseItem v-for="(part, idx) in evaluateStore.badParts" :name="`error-${idx}`"
-                                       :id="`error-${idx}`">
-                            <template #arrow>
-                                <NaiveIcon name="material-symbols:arrow-forward-ios-rounded" :size="14"/>
-                            </template>
-
-                            <template #header>
-                                {{ part.details[0].type === "word" ? $t("Word error") : $t("Sentence error") }}
-                            </template>
-
-                            <template #header-extra>
-                                # {{ part.id }}
-                            </template>
-
-                            <div class="w-fit border bg-gray-50 px-2 leading-6 py-0.5">"{{ part.text }}"</div>
-
-                            <div class="my-2 flex flex-col border-b py-2 leading-6 last:mb-0 last:border-0 last:pb-0"
-                                 v-for="detail in part.details">
-                                <div class="mb-2 flex gap-1">
-                                    <div v-for="i in detail.serious_level" class="h-2 w-4 rounded-sm"
-                                         :class="detail.serious_level >= 3 ? 'bg-red-500' : 'bg-yellow-500'"></div>
-                                </div>
-                                <span><strong>Issue: </strong>{{ detail.issue }}</span>
-                                <span><strong>Idea: </strong>{{ detail.idea }}</span>
+                <NScrollbar v-else>
+                    <div v-for="(item, index) in evaluateStore.badParts" :key="index"
+                         class="mb-4 flex flex-col last:mb-0">
+                        <div class="w-full w-fit grow rounded-t border border-b-0 p-2 leading-6">
+                            <NTag type="error" size="small">
+                                {{ item.details[0].type === "word" ? "Word" : "Sentence" }} error #{{ index }}
+                            </NTag>
+                            <div class="mt-1">"{{ item.highlight.trim() }}"</div>
+                        </div>
+                        <div class="flex group" v-for="detail in item.details">
+                            <div class="flex w-6 shrink-0 items-center justify-center group-last:rounded-bl text-white"
+                                 :class="detail.serious_level >= 3 ? 'bg-red-500' : 'bg-yellow-500'">
+                                <NaiveIcon v-if="detail.serious_level >= 3" name="ph:fire-fill" :size="14"/>
+                                <NaiveIcon v-else name="fa6-solid:bolt-lightning" :size="14"/>
                             </div>
-                        </NCollapseItem>
-                    </NCollapse>
-                </div>
+                            <div
+                                class="flex grow flex-col group-last:rounded-br border-t border-r group-last:border-b p-2 leading-6 space-y-2">
+                                <div><b>{{ $t("Issue") }}</b>: {{ detail.issue }}</div>
+                                <div><b>{{ $t("Idea") }}</b>: {{ detail.idea }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </NScrollbar>
             </div>
         </div>
     </NSpin>
