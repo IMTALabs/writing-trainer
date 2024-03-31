@@ -31,28 +31,26 @@
     </div>
 
     <editor-content class="mt-4 text-base" :editor="editor"/>
+
     <div class="mt-4 text-xs text-gray-400 character-count" v-if="editor">
         <div class="flex justify-end gap-3">
             <NTag size="small"
                   :type="editor.storage.characterCount.characters() >= limitCharacters ? 'error' : 'default'">
-                {{ editor.storage.characterCount.characters() }}/{{ limitCharacters }} {{  $t("characters") }}
+                {{ editor.storage.characterCount.characters() }}/{{ limitCharacters }} {{ $t("characters") }}
             </NTag>
             <NTag size="small">
-                {{ editor.storage.characterCount.words() }} {{ $t("words")}}
+                {{ editor.storage.characterCount.words() }} {{ $t("words") }}
             </NTag>
         </div>
-
     </div>
-
 </template>
 
 <script setup>
-import {useEditor, EditorContent} from "@tiptap/vue-3";
+import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
-import {Placeholder} from "@tiptap/extension-placeholder";
+import { Placeholder } from "@tiptap/extension-placeholder";
 import CharacterCount from "@tiptap/extension-character-count";
-import {useTypoStore} from "~/stores/typo.js";
-
+import { useTypoStore } from "~/stores/typo.js";
 
 const typoStore = useTypoStore();
 
@@ -60,7 +58,7 @@ const content = typoStore.submission;
 
 const limitCharacters = 4000;
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const editor = useEditor({
     content: content,
@@ -78,12 +76,12 @@ const editor = useEditor({
 
 });
 
-const getContent = () =>{
+const getContent = () => {
     typoStore.setSubmission(editor.value.getHTML());
     return editor.value.getHTML();
-}
+};
 
-defineExpose({getContent})
+defineExpose({ getContent });
 </script>
 
 <style scoped lang="scss">
