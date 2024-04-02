@@ -54,7 +54,7 @@ const evaluateStore = useEvaluateStore();
     <NPopover trigger="manual" style="max-width: 360px" :show="isShow" :show-arrow="false">
         <template #trigger>
             <span :class="sentence?.type" @mouseleave="isShow = false" @mousemove.stop="showUp"
-                  @click.stop="evaluateStore.setHighlighting([`error-${sentence?.id}`])">
+                  @click.stop="evaluateStore.setHighlighting([sentence?.id ?? 0])">
                 <template v-for="token in tokens">
                     <span v-if="typeof token === 'string'" v-html="token"/>
                     <HighlightSentence v-else :sentence="token" @child-up="childUp"/>
