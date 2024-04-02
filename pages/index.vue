@@ -69,6 +69,20 @@ const handleSubmit = async () => {
             message.success(t("No errors found"));
         } else {
             isEditing.value = false;
+            loadingBar.finish();
+            showSpin.value = false;
+
+            const evaluateResponse = await $fetch("https://8800.imta-chatbot.online/evaluate", {
+                method: "POST",
+                body: {
+                    id: String(Date.now() * Math.random()),
+                    instruction: evaluateStore.instruction,
+                    submission: evaluateStore.submission,
+                    keys: []
+                },
+                retry: 2
+            });
+            evaluateStore.setScore(evaluateResponse);
         }
     } catch (error) {
         message.error(error);
@@ -78,18 +92,46 @@ const handleSubmit = async () => {
     }
 };
 
-const headerClick = (data) => {
-    if (data.expanded) {
-        evaluateStore.setHighlighting([data.name]);
-    } else {
-        evaluateStore.setHighlighting([]);
+const improve = async () => {
+    loadingBar.start();
+    showSpin.value = true;
+
+    try {
+        message.info(t("Improving ..."));
+        const response = await $fetch("https://8800.imta-chatbot.online/improve", {
+            method: "POST",
+            body: {
+                id: String(Date.now() * Math.random()),
+                instruction: evaluateStore.instruction,
+                submission: evaluateStore.submission,
+                errors: {
+                    highlight: evaluateStore.highlighting,
+                    bad_parts: evaluateStore.badParts
+                },
+                band: evaluateStore.score?.band_score,
+                keys: []
+            },
+            retry: 2
+        });
+        evaluateStore.setSubmission(response.improved_version);
+        isEditing.value = true;
+        message.success(t("Improved"));
+    } catch (error) {
+        message.error(error);
+    } finally {
+        loadingBar.finish();
+        showSpin.value = false;
     }
 };
 
 watch(() => evaluateStore.highlighting, () => {
     const needleId = evaluateStore.highlighting[evaluateStore.highlighting.length - 1];
-    if (needleId) {
-        message.info(t("Focus mode is in progress! Coming soon!"));
+    if (needleId !== null) {
+        const id = `error-${ needleId }`;
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     }
 });
 </script>
@@ -132,20 +174,49 @@ watch(() => evaluateStore.highlighting, () => {
 
                     <EvaluateEditor v-if="isEditing" @submit="handleSubmit"/>
                     <div v-else>
-                        <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost class="mb-4">
-                            {{ $t("Back to edit") }}
-                        </NButton>
+                        <div class="mb-4 flex items-center justify-between">
+                            <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost>
+                                {{ $t("Back to edit") }}
+                            </NButton>
+                            <NButton color="#000000" @click="improve" v-if="evaluateStore.score?.band_score">
+                                {{ $t("Improve") }}
+                            </NButton>
+                        </div>
                         <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
                                             :paragraph="paragraph"/>
                     </div>
                 </div>
             </NScrollbar>
 
-            <div class="w-1/3 max-w-xl shrink-0 p-4 h-[calc(100vh-130px)] overflow-y-auto" ref="errorScroll">
-                <NEmpty v-if="evaluateStore.badParts.length < 1"
+            <div class="w-1/3 max-w-xl shrink-0 h-[calc(100vh-130px)] overflow-y-auto">
+                <NEmpty v-if="evaluateStore.badParts.length < 1" class="mt-8"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
-                <NScrollbar v-else>
-                    <div v-for="(item, index) in evaluateStore.badParts" :key="index"
+                <NScrollbar v-else class="p-4" ref="errorScroll">
+                    <Transition name="page" mode="out-in">
+                        <div v-if="evaluateStore.score" class="mb-4 flex flex-col items-center">
+                            <span class="text-7xl font-bold"
+                                  :class="evaluateStore.score?.band_score >= 7.5 ? 'text-green-500' : evaluateStore.score?.band_score >= 5.5 ? 'text-yellow-500' : 'text-red-500'">
+                                {{ evaluateStore.score.band_score }}
+                            </span>
+                            <div class="mt-2 flex w-full items-center justify-center gap-3">
+                                <div v-for="(cri, index) in evaluateStore.score.criteria" :key="index">
+                                    <n-popover style="max-width: 300px" trigger="hover">
+                                        <template #trigger>
+                                            <div>
+                                                <span class="font-bold">{{ Object.keys(cri)[0] }}</span>: {{ cri.score }}
+                                            </div>
+                                        </template>
+                                        {{ Object.values(cri)[0] }}
+                                    </n-popover>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else class="flex items-center justify-center gap-2 p-8 mb-4">
+                            <NaiveIcon name="svg-spinners:ring-resize" :size="24"/>
+                            Grading ...
+                        </div>
+                    </Transition>
+                    <div v-for="(item, index) in evaluateStore.badParts" :key="index" :id="`error-${index}`"
                          class="mb-4 flex flex-col last:mb-0">
                         <div class="w-full w-fit grow rounded-t border border-b-0 p-2 leading-6">
                             <NTag type="error" size="small">

@@ -4,12 +4,10 @@ export const useEvaluateStore = defineStore("evaluate", {
         submission: "",
         highlight: "",
         badParts: [],
-        highlighting: ["error-0"]
+        highlighting: [0],
+        score: null
     }),
     actions: {
-        setInstruction(instruction) {
-            this.instruction = instruction;
-        },
         setSubmission(submission) {
             this.submission = submission;
         },
@@ -21,13 +19,16 @@ export const useEvaluateStore = defineStore("evaluate", {
             tempDiv.innerHTML = this.highlight;
 
             this.badParts = badParts.map((part) => {
-                const element = tempDiv.querySelector(`[data-error="${part.id}"]`);
+                const element = tempDiv.querySelector(`[data-error="${ part.id }"]`);
                 part.text = element.innerText;
                 return part;
             });
         },
         setHighlighting(id) {
             this.highlighting = id;
+        },
+        setScore(score) {
+            this.score = score;
         }
     }
 });
