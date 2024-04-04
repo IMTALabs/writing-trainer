@@ -72,7 +72,7 @@ const handleSubmit = async () => {
             return item.value;
         }).join("");
         if(typoFixed.value === origin.value){
-            message.success(t("No typos found"));
+            message.success(t("There is nothing in the paragraph that needs editing"));
         } else{
             isEditing.value = false;
         }
