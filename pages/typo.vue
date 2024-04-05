@@ -22,6 +22,7 @@ const highlight = ref(null);
 
 const loadingBar = useLoadingBar();
 const message = useMessage();
+const config = useRuntimeConfig();
 
 const diff = ref([]);
 
@@ -41,7 +42,7 @@ const handleSubmit = async () => {
     loadingBar.start();
     showSpin.value = true;
     try {
-        const response = await $fetch("https://8800.imta-chatbot.online/fix_typos", {
+        const response = await $fetch(config.public.api.baseUrl + "/fix_typos", {
             method: "POST",
             body: {
                 id: String(Date.now() * Math.random()),

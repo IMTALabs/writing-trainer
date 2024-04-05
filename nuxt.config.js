@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
     site: {
         logo: "/favicon.png",
-        url: process.env.NUXT_APP_URL,
+        url: process.env.APP_URL,
         name: "LAN Trainer",
         description: "A platform for learning and improving your English skills."
     },
@@ -16,7 +16,8 @@ export default defineNuxtConfig({
         "@bg-dev/nuxt-naiveui",
         "@pinia/nuxt",
         "@nuxtjs/i18n",
-        "@nuxtjs/seo"
+        "@nuxtjs/seo",
+        "@vueuse/nuxt"
     ],
 
     postcss: {
@@ -33,5 +34,13 @@ export default defineNuxtConfig({
         locales: ["en", "vi"],
         defaultLocale: "en",
         strategy: "no_prefix"
+    },
+
+    runtimeConfig: {
+        public: {
+            api: {
+                baseUrl: process.env.API_BASE_URL
+            }
+        }
     }
 });
