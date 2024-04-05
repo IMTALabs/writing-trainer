@@ -5,6 +5,7 @@ import EvaluateEditor from "~/components/EvaluateEditor.vue";
 const message = useMessage();
 const loadingBar = useLoadingBar();
 const { t } = useI18n();
+const config = useRuntimeConfig();
 
 // Page meta
 definePageMeta({
@@ -53,7 +54,7 @@ const handleSubmit = async () => {
     try {
         message.info(t("Evaluating ..."));
 
-        const response = await $fetch("https://8800.imta-chatbot.online/generate_errors", {
+        const response = await $fetch(config.public.api.baseUrl + "/generate_errors", {
             method: "POST",
             body: {
                 id: String(Date.now() * Math.random()),
@@ -72,7 +73,7 @@ const handleSubmit = async () => {
             loadingBar.finish();
             showSpin.value = false;
 
-            const evaluateResponse = await $fetch("https://8800.imta-chatbot.online/evaluate", {
+            const evaluateResponse = await $fetch(config.public.api.baseUrl + "/evaluate", {
                 method: "POST",
                 body: {
                     id: String(Date.now() * Math.random()),
@@ -98,7 +99,7 @@ const improve = async () => {
 
     try {
         message.info(t("Improving ..."));
-        const response = await $fetch("https://8800.imta-chatbot.online/improve", {
+        const response = await $fetch(config.public.api.baseUrl + "/improve", {
             method: "POST",
             body: {
                 id: String(Date.now() * Math.random()),
@@ -189,7 +190,7 @@ watch(() => evaluateStore.highlighting, () => {
             </NScrollbar>
 
             <div class="w-1/3 max-w-xl shrink-0 h-[calc(100vh-130px)] overflow-y-auto">
-                <NEmpty v-if="evaluateStore.badParts.length < 1" class="mt-8"
+                <NEmpty v-if="evaluateStore.badParts.length < 1" class="mt-8 px-4"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
                 <NScrollbar v-else class="p-4" ref="errorScroll">
                     <Transition name="page" mode="out-in">
