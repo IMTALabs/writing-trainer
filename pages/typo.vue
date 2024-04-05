@@ -72,7 +72,12 @@ const handleSubmit = async () => {
             }
             return item.value;
         }).join("");
-        isEditing.value = false;
+        if(typoFixed.value === origin.value){
+            message.success(t("There is nothing in the paragraph that needs editing"));
+        } else{
+            isEditing.value = false;
+        }
+
     } catch (error) {
         message.error(error);
     } finally {
@@ -105,7 +110,7 @@ const generateDiff = (origin, fixed) => {
                     <TypoEditor ref="editorRef"/>
                 </div>
             </div>
-            <div v-else class="">
+            <div v-else>
                 <div class="flex border-b border-solid">
                     <div class="w-1/2 border-r border-solid p-4">
                         <label class="flex items-center justify-between gap-1 text-lg font-semibold">
