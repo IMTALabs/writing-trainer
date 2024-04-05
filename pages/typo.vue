@@ -99,7 +99,7 @@ const generateDiff = (origin, fixed) => {
 
 const backWithResult = (fixedTypos) => {
     isEditing.value = true;
-    typoStore.submission = fixedTypos;
+    typoStore.setSubmission(fixedTypos);
 };
 </script>
 
