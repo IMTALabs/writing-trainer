@@ -9,6 +9,8 @@ definePageMeta({
     title: "Grammar Checker"
 });
 
+const typoStore = useTypoStore();
+
 defineOgImageComponent("NuxtSeo", {
     title: t("Grammar Checker"),
     description: t("Check your grammar with ease"),
@@ -72,9 +74,9 @@ const handleSubmit = async () => {
             }
             return item.value;
         }).join("");
-        if(typoFixed.value === origin.value){
+        if (typoFixed.value === origin.value) {
             message.success(t("There is nothing in the paragraph that needs editing"));
-        } else{
+        } else {
             isEditing.value = false;
         }
 
@@ -94,6 +96,11 @@ const generateDiff = (origin, fixed) => {
         added: part.added
     }));
 };
+
+const backWithResult = (fixedTypos) => {
+    isEditing.value = true;
+    typoStore.submission = fixedTypos;
+};
 </script>
 
 <template>
@@ -101,7 +108,7 @@ const generateDiff = (origin, fixed) => {
         <div class="mx-auto max-w-5xl border-x min-h-[calc(100vh-130px)]">
             <div v-if="isEditing" class="p-4">
                 <div class="flex items-center justify-between gap-1 text-lg font-semibold">
-                    {{$t("Grammar Checker")}}
+                    {{ $t("Grammar Checker") }}
                     <NButton class="px-[20px]" color="#000000" @click="handleSubmit">
                         {{ $t("Check") }}
                     </NButton>
@@ -128,9 +135,14 @@ const generateDiff = (origin, fixed) => {
                 <div class="p-4">
                     <div class="flex items-center justify-between gap-1 text-lg font-semibold">
                         {{ $t("Final Result") }}
-                        <NButton color="#000000" size="small" @click="isEditing = true" ghost>
-                            {{ $t("Back to checker") }}
-                        </NButton>
+                        <div>
+                            <NButton class="mr-4" color="#000000" size="small" @click="backWithResult(fixedTypos)" ghost>
+                                {{ $t("Back with fixed result") }}
+                            </NButton>
+                            <NButton color="#000000" size="small" @click="isEditing = true" ghost>
+                                {{ $t("Back to checker") }}
+                            </NButton>
+                        </div>
                     </div>
                     <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
                 </div>
