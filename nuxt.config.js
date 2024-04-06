@@ -17,7 +17,8 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@nuxtjs/i18n",
         "@nuxtjs/seo",
-        "@vueuse/nuxt"
+        "@vueuse/nuxt",
+        "@nuxtjs/supabase"
     ],
 
     postcss: {
@@ -34,6 +35,10 @@ export default defineNuxtConfig({
         locales: ["en", "vi"],
         defaultLocale: "en",
         strategy: "no_prefix"
+    },
+
+    supabase: {
+        redirect: false
     },
 
     runtimeConfig: {
