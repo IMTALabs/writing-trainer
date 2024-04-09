@@ -3,21 +3,14 @@ export default defineNuxtConfig({
         pageTransition: { name: "page", mode: "out-in" }
     },
 
-    site: {
-        logo: "/favicon.png",
-        url: process.env.APP_URL,
-        name: "LAN Trainer",
-        description: "A platform for learning and improving your English skills."
-    },
-
     devtools: { enabled: true },
 
     modules: [
         "@bg-dev/nuxt-naiveui",
         "@pinia/nuxt",
         "@nuxtjs/i18n",
-        "@nuxtjs/seo",
-        "@vueuse/nuxt"
+        "@vueuse/nuxt",
+        "@nuxtjs/supabase"
     ],
 
     postcss: {
@@ -36,8 +29,16 @@ export default defineNuxtConfig({
         strategy: "no_prefix"
     },
 
+    supabase: {
+        redirect: false
+    },
+
     runtimeConfig: {
         public: {
+            app: {
+                url: process.env.APP_URL,
+                domain: process.env.APP_DOMAIN
+            },
             api: {
                 baseUrl: process.env.API_BASE_URL
             }

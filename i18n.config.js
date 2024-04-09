@@ -41,8 +41,12 @@ export default defineI18nConfig(() => ({
             "Evaluate your essay with ease": "Evaluate your essay with ease",
             "Vocab Trainer": "Vocab Trainer",
             "Dictation": "Dictation",
+            "There is nothing in the paragraph that needs editing": "There is nothing in the paragraph that needs editing",
+            "Back with fixed result": "Back with fixed result",
+            "Back to checker": "Back to checker",
             "Coming soon": "Coming soon",
-            "There is nothing in the paragraph that needs editing": "There is nothing in the paragraph that needs editing"
+            "Login": "Login",
+            "Filling website with new language...": "Filling website with new language..."
         },
         vi: {
             "Instruction is required": "Đề bài là bắt buộc",
@@ -84,8 +88,12 @@ export default defineI18nConfig(() => ({
             "Evaluate your essay with ease": "Đánh giá bài luận của bạn một cách dễ dàng",
             "Vocab Trainer": "Luyện từ vựng",
             "Dictation": "Chép chính tả",
+            "There is nothing in the paragraph that needs editing": "Đoạn văn không có gì để cần sửa",
+            "Back with fixed result": "Quay lại với kết quả đã sửa",
+            "Back to checker": "Quay lại kiểm tra",
             "Coming soon": "Sắp ra mắt",
-            "There is nothing in the paragraph that needs editing": "Đoạn văn không có gì để cần sửa"
+            "Login": "Đăng nhập",
+            "Filling website with new language...": "Đang thay đổi ngôn ngữ..."
         }
     }
 }));

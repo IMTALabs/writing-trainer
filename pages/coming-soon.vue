@@ -10,13 +10,6 @@ definePageMeta({
     title: "Coming soon"
 });
 
-defineOgImageComponent("NuxtSeo", {
-    title: t("Grammar Checker"),
-    description: t("Check your grammar with ease"),
-    theme: "#ff0000",
-    colorMode: "dark"
-});
-
 // Props
 //...
 
@@ -37,7 +30,7 @@ defineOgImageComponent("NuxtSeo", {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center h-[calc(100vh-130px)]">
+    <div class="flex flex-col justify-center items-center h-[calc(100vh-112px)]">
         <div class="text-7xl font-black tracking-widest">COMING</div>
         <div class="text-7xl font-black tracking-widest">SOON</div>
 

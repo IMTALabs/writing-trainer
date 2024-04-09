@@ -19,6 +19,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "diff": "^5.2.0",
+    "marked": "^12.0.1",
     "nuxt": "^3.11.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
@@ -27,7 +28,7 @@
   "devDependencies": {
     "@bg-dev/nuxt-naiveui": "^1.10.4",
     "@nuxtjs/i18n": "^8.2.0",
-    "@nuxtjs/seo": "^2.0.0-rc.10",
+    "@nuxtjs/supabase": "^1.2.0",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "autoprefixer": "^10.4.19",

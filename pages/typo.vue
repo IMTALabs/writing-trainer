@@ -9,12 +9,7 @@ definePageMeta({
     title: "Grammar Checker"
 });
 
-defineOgImageComponent("NuxtSeo", {
-    title: t("Grammar Checker"),
-    description: t("Check your grammar with ease"),
-    theme: "#ff0000",
-    colorMode: "dark"
-});
+const typoStore = useTypoStore();
 
 const showSpin = ref(false);
 const isEditing = ref(true);
@@ -72,9 +67,9 @@ const handleSubmit = async () => {
             }
             return item.value;
         }).join("");
-        if(typoFixed.value === origin.value){
+        if (typoFixed.value === origin.value) {
             message.success(t("There is nothing in the paragraph that needs editing"));
-        } else{
+        } else {
             isEditing.value = false;
         }
 
@@ -94,15 +89,20 @@ const generateDiff = (origin, fixed) => {
         added: part.added
     }));
 };
+
+const backWithResult = (fixedTypos) => {
+    isEditing.value = true;
+    typoStore.setSubmission(fixedTypos);
+};
 </script>
 
 <template>
     <NSpin :show="showSpin">
-        <div class="mx-auto max-w-5xl border-x min-h-[calc(100vh-130px)]">
+        <div class="mx-auto max-w-5xl min-h-[calc(100vh-112px)]">
             <div v-if="isEditing" class="p-4">
                 <div class="flex items-center justify-between gap-1 text-lg font-semibold">
-                    {{$t("Grammar Checker")}}
-                    <NButton class="px-[20px]" color="#000000" @click="handleSubmit">
+                    {{ $t("Grammar Checker") }}
+                    <NButton class="px-[20px]" color="#059669" @click="handleSubmit">
                         {{ $t("Check") }}
                     </NButton>
                 </div>
@@ -116,23 +116,28 @@ const generateDiff = (origin, fixed) => {
                         <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                             {{ $t("Your submission") }}
                         </label>
-                        <div class="mt-4 text-base leading-7" v-html="origin"></div>
+                        <div class="mt-4 text-base leading-7 bg-white border p-4 shadow rounded" v-html="origin"></div>
                     </div>
                     <div class=" w-1/2 p-4">
                         <label class="flex items-center justify-between gap-1 text-lg font-semibold">
                             {{ $t("Suggestion") }}
                         </label>
-                        <div class="mt-4 text-base leading-7" v-html="typoFixed"></div>
+                        <div class="mt-4 text-base leading-7 bg-white border p-4 shadow rounded" v-html="typoFixed"></div>
                     </div>
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between gap-1 text-lg font-semibold">
                         {{ $t("Final Result") }}
-                        <NButton color="#000000" size="small" @click="isEditing = true" ghost>
-                            {{ $t("Back to checker") }}
-                        </NButton>
+                        <div>
+                            <NButton class="mr-4" color="#000000" size="small" @click="backWithResult(fixedTypos)" ghost>
+                                {{ $t("Back with fixed result") }}
+                            </NButton>
+                            <NButton color="#000000" size="small" @click="isEditing = true" ghost>
+                                {{ $t("Back to checker") }}
+                            </NButton>
+                        </div>
                     </div>
-                    <div class="mt-4 text-base leading-7" v-html="fixedTypos"></div>
+                    <div class="mt-4 text-base leading-7 bg-white border p-4 shadow rounded" v-html="fixedTypos"></div>
                 </div>
 
             </div>
