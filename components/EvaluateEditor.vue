@@ -57,7 +57,7 @@ const submit = () => {
             </NButton>
         </div>
 
-        <NButton color="#000000" @click="submit">
+        <NButton color="#059669" @click="submit">
             {{ $t("Evaluate") }}
         </NButton>
     </div>

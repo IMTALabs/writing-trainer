@@ -28,7 +28,6 @@
   "devDependencies": {
     "@bg-dev/nuxt-naiveui": "^1.10.4",
     "@nuxtjs/i18n": "^8.2.0",
-    "@nuxtjs/seo": "^2.0.0-rc.10",
     "@nuxtjs/supabase": "^1.2.0",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",

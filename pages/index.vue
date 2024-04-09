@@ -1,5 +1,6 @@
 <script setup>
 import EvaluateEditor from "~/components/EvaluateEditor.vue";
+import { marked } from "marked";
 
 // Composable
 const message = useMessage();
@@ -10,13 +11,6 @@ const config = useRuntimeConfig();
 // Page meta
 definePageMeta({
     title: "Essay Assessment"
-});
-
-defineOgImageComponent("NuxtSeo", {
-    title: t("Essay Assessment"),
-    description: t("Evaluate your essay with ease"),
-    theme: "#ff0000",
-    colorMode: "dark"
 });
 
 // Theme overrides
@@ -114,7 +108,7 @@ const improve = async () => {
             },
             retry: 2
         });
-        evaluateStore.setSubmission(response.improved_version);
+        evaluateStore.setSubmission(marked(response.improved_version));
         isEditing.value = true;
         message.success(t("Improved"));
     } catch (error) {
@@ -140,9 +134,9 @@ watch(() => evaluateStore.highlighting, () => {
 <template>
     <NSpin :show="showSpin">
         <div class="flex">
-            <NScrollbar class="border-r grow h-[calc(100vh-130px)]">
+            <NScrollbar class="border-r grow h-[calc(100vh-112px)]">
                 <div class="border-b p-4">
-                    <label class="flex items-center justify-between gap-1 text-lg font-semibold">
+                    <label class="mb-2 flex items-center justify-between gap-1 text-lg font-semibold">
                         {{ $t("Instruction") }}
                         <NTooltip trigger="hover" :style="{ maxWidth: '200px' }">
                             <template #trigger>
@@ -179,17 +173,19 @@ watch(() => evaluateStore.highlighting, () => {
                             <NButton :color="'#000000'" @click="isEditing = true" size="small" ghost>
                                 {{ $t("Back to edit") }}
                             </NButton>
-                            <NButton color="#000000" @click="improve" v-if="evaluateStore.score?.band_score">
+                            <NButton color="#059669" @click="improve" v-if="evaluateStore.score?.band_score">
                                 {{ $t("Improve") }}
                             </NButton>
                         </div>
-                        <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
-                                            :paragraph="paragraph"/>
+                        <div class="p-4 rounded bg-white shadow border">
+                            <HighlightParagraph v-for="paragraph in evaluateStore.highlight.match(/<p(.*?)<\/p>/g)"
+                                                :paragraph="paragraph"/>
+                        </div>
                     </div>
                 </div>
             </NScrollbar>
 
-            <div class="w-1/3 max-w-xl shrink-0 h-[calc(100vh-130px)] overflow-y-auto">
+            <div class="w-1/3 max-w-xl shrink-0 h-[calc(100vh-112px)] overflow-y-auto">
                 <NEmpty v-if="evaluateStore.badParts.length < 1" class="mt-8 px-4"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
                 <NScrollbar v-else class="p-4" ref="errorScroll">
@@ -203,8 +199,9 @@ watch(() => evaluateStore.highlighting, () => {
                                 <div v-for="(cri, index) in evaluateStore.score.criteria" :key="index">
                                     <n-popover style="max-width: 300px" trigger="hover">
                                         <template #trigger>
-                                            <div>
-                                                <span class="font-bold">{{ Object.keys(cri)[0] }}</span>: {{ cri.score }}
+                                            <div class="cursor-help">
+                                                <span class="font-bold">{{ Object.keys(cri)[0] }}</span>
+                                                : {{ cri.score }}
                                             </div>
                                         </template>
                                         {{ Object.values(cri)[0] }}
@@ -212,13 +209,13 @@ watch(() => evaluateStore.highlighting, () => {
                                 </div>
                             </div>
                         </div>
-                        <div v-else class="flex items-center justify-center gap-2 p-8 mb-4">
+                        <div v-else class="mb-4 flex items-center justify-center gap-2 p-8">
                             <NaiveIcon name="svg-spinners:ring-resize" :size="24"/>
                             Grading ...
                         </div>
                     </Transition>
                     <div v-for="(item, index) in evaluateStore.badParts" :key="index" :id="`error-${index}`"
-                         class="mb-4 flex flex-col last:mb-0">
+                         class="mb-4 flex flex-col last:mb-0 bg-white">
                         <div class="w-full w-fit grow rounded-t border border-b-0 p-2 leading-6">
                             <NTag type="error" size="small">
                                 {{ item.details[0].type === "word" ? "Word" : "Sentence" }} error #{{ index }}
@@ -246,6 +243,6 @@ watch(() => evaluateStore.highlighting, () => {
 
 <style scoped lang="scss">
 :deep(.n-input-wrapper) {
-    @apply px-0;
+    @apply border rounded shadow-sm
 }
 </style>

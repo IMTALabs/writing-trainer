@@ -85,11 +85,17 @@ defineExpose({ getContent });
 </script>
 
 <style scoped lang="scss">
-:deep(.tiptap) p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #adb5bd;
-    pointer-events: none;
-    height: 0;
+:deep(.tiptap) {
+    p {
+        @apply text-base leading-7;
+    }
+
+    p.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: #adb5bd;
+        pointer-events: none;
+        height: 0;
+    }
 }
 </style>

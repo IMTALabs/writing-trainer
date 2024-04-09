@@ -25,10 +25,10 @@ const formValue = ref({
 });
 const requestValue = ref({
     user: {
-        name: "quanph",
-        email: "ok@gmail.com",
-        description: "Vocab trainer",
-        sampleUrl: "https://vocabulary.com",
+        name: "",
+        email: "",
+        description: "",
+        sampleUrl: "",
         images: []
     }
 });
@@ -121,16 +121,14 @@ const createThumbnailUrl = (file) => {
 
 <template>
     <div>
-        <NButton color="#000000" @click="showModal = !showModal">
-            <template #icon>
-                <NaiveIcon name="ic:baseline-feedback" :size="16"/>
-            </template>
+        <NuxtLink class="cursor-pointer hover:text-emerald-600 flex items-center gap-1" @click.prevent="showModal = !showModal">
+            <NaiveIcon name="ph:chats-teardrop-duotone" :size="16"/>
             {{ $t("Feedback") }}
-        </NButton>
+        </NuxtLink>
 
         <Teleport to="body">
             <NModal v-model:show="showModal" preset="card" :title="$t('Feedback')" class="max-w-xl">
-                <NTabs type="segment" animated default-value="feature-request">
+                <NTabs type="segment" animated default-value="feedback">
                     <NTabPane name="feedback" tab="Feedback">
                         <NForm
                             ref="formRef"
@@ -155,11 +153,11 @@ const createThumbnailUrl = (file) => {
                             </NFormItem>
                         </NForm>
 
-                        <div class="flex justify-end space-x-2 mt-4">
+                        <div class="mt-4 flex justify-end space-x-2">
                             <NButton @click="showModal = false" color="#000000" ghost>
                                 {{ $t("Close") }}
                             </NButton>
-                            <NButton @click.prevent="submitFeedback" color="#000000" :disabled="isSaving">
+                            <NButton @click.prevent="submitFeedback" color="#059669" :disabled="isSaving">
                                 {{ $t("Submit") }}
                             </NButton>
                         </div>
@@ -202,11 +200,11 @@ const createThumbnailUrl = (file) => {
                             </NFormItem>
                         </NForm>
 
-                        <div class="flex justify-end space-x-2 mt-4">
+                        <div class="mt-4 flex justify-end space-x-2">
                             <NButton @click="showModal = false" color="#000000" ghost>
                                 {{ $t("Close") }}
                             </NButton>
-                            <NButton @click.prevent="submitRequest" color="#000000" :disabled="isSaving">
+                            <NButton @click.prevent="submitRequest" color="#059669" :disabled="isSaving">
                                 {{ $t("Submit") }}
                             </NButton>
                         </div>
