@@ -3856,6 +3856,11 @@ kolorist@^1.8.0:
   resolved "https://registry.yarnpkg.com/kolorist/-/kolorist-1.8.0.tgz#edddbbbc7894bc13302cdf740af6374d4a04743c"
   integrity sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==
 
+laravel-echo@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.16.1.tgz#880b922d1ff4ea1f2c091b804f9476a26cb11285"
+  integrity sha512-++Ylb6M3ariC9Rk5WE5gZjj6wcEV5kvLF8b+geJ5/rRIfdoOA+eG6b9qJPrarMD9rY28Apx+l3eelIrCc2skVg==
+
 launch-editor@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.6.1.tgz#f259c9ef95cbc9425620bbbd14b468fcdb4ffe3c"
@@ -5290,6 +5295,13 @@ punycode.js@^2.3.1:
   resolved "https://registry.yarnpkg.com/punycode.js/-/punycode.js-2.3.1.tgz#6b53e56ad75588234e79f4affa90972c7dd8cdb7"
   integrity sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==
 
+pusher-js@^8.4.0-rc2:
+  version "8.4.0-rc2"
+  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-8.4.0-rc2.tgz#44f33bfe5bc89f741d82601125d6095bde28261b"
+  integrity sha512-d87GjOEEl9QgO5BWmViSqW0LOzPvybvX6WA9zLUstNdB57jVJuR27zHkRnrav2a3+zAMlHbP2Og8wug+rG8T+g==
+  dependencies:
+    tweetnacl "^1.0.3"
+
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
@@ -6084,6 +6096,11 @@ tuf-js@^2.2.0:
     "@tufjs/models" "2.0.0"
     debug "^4.3.4"
     make-fetch-happen "^13.0.0"
+
+tweetnacl@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-1.0.3.tgz#ac0af71680458d8a6378d0d0d050ab1407d35596"
+  integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
 
 type-fest@^0.21.3:
   version "0.21.3"

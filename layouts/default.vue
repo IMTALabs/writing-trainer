@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/vue";
     <SpeedInsights/>
     <Header/>
     <Navbar/>
-    <main class="bg-gray-50">
+    <main class="bg-gray-50 min-h-[calc(100vh-112px)]">
         <slot></slot>
     </main>
 </template>

@@ -6,20 +6,20 @@ import SpinnerOne from "~/components/svg/SpinnerOne.vue";
 useHead({
     titleTemplate: (titleChunk) => {
         return titleChunk ? `${ titleChunk } - LAN Trainer` : "LAN Trainer";
-    },
-    meta: [
-        { name: "viewport", content: "width=device-width, initial-scale=1" }
-    ]
+    }
 });
 
 // Composable
 const route = useRoute();
 const { t } = useI18n();
-const supabase = useSupabaseClient();
 const authStore = useAuthStore();
 
+useSeoMeta({
+    ogImage: "/thumbnail.jpg"
+});
+
 // Data
-const accessToken = ref(null);
+const loadingRef = ref(null);
 const themeOverrides = {
     Button: {
         textColorTextHover: "#000000"
@@ -39,24 +39,11 @@ const themeOverrides = {
 const title = computed(() => t(route.meta.title ?? "Untitled"));
 
 // Hook
-supabase.auth.onAuthStateChange(async (event, session) => {
-    console.log(event);
-    if (event === "SIGNED_IN") {
-        accessToken.value = session?.provider_token;
-        const response = await $fetch("http://localhost:8000/api/google/login-from-token", {
-            method: "POST",
-            body: {
-                access_token: accessToken.value
-            },
-            retry: 0
+onMounted(() => {
+    if (authStore.isFirstTime) {
+        authStore.fetchUserInformation().then(() => {
+            loadingRef.value.remove();
         });
-        if (response) {
-            const user = useSupabaseUser();
-            authStore.login(user);
-            navigateTo("/");
-        }
-    } else if (event === "SIGNED_OUT") {
-        authStore.logout();
     }
 });
 </script>
@@ -73,6 +60,12 @@ supabase.auth.onAuthStateChange(async (event, session) => {
                     <NLoadingBarProvider>
                         <NDialogProvider>
                             <NModalProvider>
+                                <div ref="loadingRef"
+                                     class="fixed z-10 flex h-screen w-screen items-center justify-center gap-2 bg-white text-gray-300">
+                                    <SpinnerOne/>
+                                    Fetching user information
+                                </div>
+
                                 <NuxtLayout>
                                     <NuxtPage/>
                                 </NuxtLayout>

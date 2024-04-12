@@ -1,6 +1,10 @@
 export default defineNuxtConfig({
     app: {
-        pageTransition: { name: "page", mode: "out-in" }
+        pageTransition: { name: "page", mode: "out-in" },
+        head: {
+            charset: "utf-8",
+            viewport: "width=device-width, initial-scale=1"
+        }
     },
 
     devtools: { enabled: true },
@@ -40,7 +44,12 @@ export default defineNuxtConfig({
                 domain: process.env.APP_DOMAIN
             },
             api: {
-                baseUrl: process.env.API_BASE_URL
+                baseUrl: process.env.API_BASE_URL,
+                serverUrl: process.env.API_SERVER_URL
+            },
+            pusher: {
+                key: process.env.PUSHER_APP_KEY,
+                cluster: process.env.PUSHER_APP_CLUSTER
             }
         }
     }

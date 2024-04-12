@@ -4,9 +4,9 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
     const authStore = useAuthStore();
 
     if (authStore.isLoggedIn === null) {
-        const user = await useSupabaseUser();
+        const user = useSupabaseUser();
         if (user.value) {
-            return navigateTo('/');
+            return navigateTo("/");
         }
     } else {
         if (authStore.isLoggedIn) {

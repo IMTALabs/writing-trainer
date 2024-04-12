@@ -1,12 +1,14 @@
 <script setup>
 import Feedback from "~/components/common/Feedback.vue";
 import LangSwitching from "~/components/svg/LangSwitching.vue";
+import { navigateTo } from "#app";
 
+// Temporary unused
 const { locale, setLocale } = useI18n();
 const router = useRouter();
 const user = useSupabaseUser();
 const supabase = useSupabaseClient();
-const message = useMessage();
+const authStore = useAuthStore();
 
 const isSwitchingLang = ref(false);
 const isLoggingOut = ref(false);
@@ -15,6 +17,7 @@ const profileOptions = [
     { label: "Logout", key: "logout" }
 ];
 
+// Temporary unused
 const changeLocale = (lang) => {
     isSwitchingLang.value = true;
     setTimeout(() => {
@@ -24,12 +27,16 @@ const changeLocale = (lang) => {
 };
 
 const handleProfileOption = async (key) => {
-    if (key === "logout") {
-        isLoggingOut.value = true;
-        await supabase.auth.signOut();
-        navigateTo("/");
-    } else {
-        message.info("Coming soon...");
+    switch (key) {
+        case "profile":
+            navigateTo("/profile");
+            break;
+        case "logout":
+            isLoggingOut.value = true;
+            await supabase.auth.signOut();
+            authStore.logout();
+            router.go(0);
+            break;
     }
 };
 </script>
@@ -69,7 +76,7 @@ const handleProfileOption = async (key) => {
                 <NDropdown trigger="hover" size="medium" :options="profileOptions" @select="handleProfileOption"
                            class="min-w-20">
                     <div class="flex h-12 items-center justify-center gap-2 border-x bg-gray-50 px-4">
-                        <n-avatar
+                        <NAvatar
                             round
                             size="small"
                             :src="user.user_metadata.avatar_url"
@@ -78,7 +85,7 @@ const handleProfileOption = async (key) => {
                             <div class="truncate max-w-20">{{ user.user_metadata.full_name }}</div>
                             <div class="flex items-center text-violet-600 font-bold -ml-0.5">
                                 <NaiveIcon name="mage:gem-c-fill" :size="16"/>
-                                1000
+                                {{ authStore.balance }}
                             </div>
                         </div>
                     </div>

@@ -30,13 +30,12 @@ onMounted(() => {
     setTimeout(() => {
         window.close();
     }, 1000);
-})
+});
 </script>
 
 <template>
     <div class="flex flex-col min-h-screen items-center justify-center">
         <NSpin size="large"/>
-        <p class="mt-8">Processing ...</p>
     </div>
 </template>
 
