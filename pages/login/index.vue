@@ -20,6 +20,7 @@ const authStore = useAuthStore();
 const isLogging = ref(false);
 const windowRef = ref(null);
 const accessToken = ref(null);
+const count = ref(0);
 
 // Computed
 // ...
@@ -45,9 +46,10 @@ const login = async () => {
 // Hooks
 const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
     if (event === "SIGNED_IN") {
+        if (++count.value > 1) return;
         accessToken.value = session?.access_token;
         try {
-            const response = await $fetch(`${ config.public.api.serverUrl }/api/google/login-from-token`, {
+            const { data } = await useAsyncData("login", () => $fetch(`${ config.public.api.serverUrl }/api/google/login-from-token`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -58,15 +60,15 @@ const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event,
                 },
                 retry: 0,
                 credentials: "include"
-            });
+            }));
 
-            if (response) {
-                authStore.login(response.balance);
-                window?.localStorage?.setItem("accessToken", response.access_token);
-                window?.localStorage?.setItem("serverId", response.id);
-                subscription?.unsubscribe();
+            if (data.value) {
+                authStore.login(data.value.balance);
+                window?.localStorage?.setItem("accessToken", data.value.access_token);
+                window?.localStorage?.setItem("serverId", data.value.id);
                 navigateTo("/");
             }
+            subscription?.unsubscribe();
         } catch (e) {
             message.error("Login failed! Can not get user information from server.");
             await supabase.auth.signOut();
