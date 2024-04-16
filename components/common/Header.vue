@@ -102,9 +102,6 @@ const handleProfileOption = async (key) => {
         <!--    <div v-if="isSwitchingLang"-->
         <!--         class="fixed top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center bg-white">-->
         <!--        <LangSwitching/>-->
-        <!--        <div>-->
-        <!--            {{ $t("Filling website with new language...") }}-->
-        <!--        </div>-->
         <!--    </div>-->
         <!--</Transition>-->
     </header>

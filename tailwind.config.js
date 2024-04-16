@@ -9,6 +9,9 @@ module.exports = {
         "./error.vue"
     ],
     theme: {
+        fontFamily: {
+            "noto-mono": ["'Noto Sans Mono'", "monospace"]
+        },
         extend: {}
     },
     plugins: []

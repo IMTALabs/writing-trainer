@@ -30,7 +30,7 @@ definePageMeta({
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center h-[calc(100vh-112px)]">
+    <div class="flex flex-col justify-center items-center h-[calc(100vh-111px)]">
         <div class="text-7xl font-black tracking-widest">COMING</div>
         <div class="text-7xl font-black tracking-widest">SOON</div>
 

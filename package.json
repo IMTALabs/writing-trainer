@@ -33,6 +33,7 @@
     "@vueuse/nuxt": "^10.9.0",
     "autoprefixer": "^10.4.19",
     "laravel-echo": "^1.16.1",
+    "nuxt-og-image": "^3.0.0-rc.52",
     "postcss": "^8.4.38",
     "pusher-js": "^8.4.0-rc2",
     "sass": "^1.72.0",

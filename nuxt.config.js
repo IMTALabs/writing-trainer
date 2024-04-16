@@ -14,7 +14,8 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@nuxtjs/i18n",
         "@vueuse/nuxt",
-        "@nuxtjs/supabase"
+        "@nuxtjs/supabase",
+        "nuxt-og-image"
     ],
 
     postcss: {

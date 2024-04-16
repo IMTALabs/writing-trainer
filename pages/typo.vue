@@ -98,7 +98,7 @@ const backWithResult = (fixedTypos) => {
 
 <template>
     <NSpin :show="showSpin">
-        <div class="mx-auto max-w-5xl min-h-[calc(100vh-112px)]">
+        <div class="mx-auto max-w-5xl min-h-[calc(100vh-111px)]">
             <div v-if="isEditing" class="p-4">
                 <div class="flex items-center justify-between gap-1 text-lg font-semibold">
                     {{ $t("Grammar Checker") }}

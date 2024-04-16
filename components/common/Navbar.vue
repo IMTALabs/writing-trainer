@@ -26,7 +26,7 @@
             </n-button>
         </NuxtLink>
 
-        <NuxtLink to="/coming-soon" class="px-2 hover:bg-gray-200 rounded-md transition-all duration-300">
+        <NuxtLink to="/vocab" class="px-2 hover:bg-gray-200 rounded-md transition-all duration-300">
             <n-button text>
                 <template #icon>
                     <n-icon>

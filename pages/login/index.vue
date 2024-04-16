@@ -81,7 +81,7 @@ const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event,
 <template>
     <div class="flex grow items-center justify-center">
         <button :disabled="isLogging" @click="login"
-                class="flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white px-6 py-2 text-sm font-medium text-gray-800 shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:bg-gray-900 dark:text-white">
+                class="flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white px-6 py-2 text-sm font-medium text-gray-800 shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
             <GoogleColor class="mr-2 h-6 w-6"/>
             <span>Continue with Google</span>
         </button>

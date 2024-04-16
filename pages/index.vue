@@ -134,7 +134,7 @@ watch(() => evaluateStore.highlighting, () => {
 <template>
     <NSpin :show="showSpin">
         <div class="flex">
-            <NScrollbar class="border-r grow h-[calc(100vh-112px)]">
+            <NScrollbar class="border-r grow h-[calc(100vh-111px)]">
                 <div class="border-b p-4">
                     <label class="mb-2 flex items-center justify-between gap-1 text-lg font-semibold">
                         {{ $t("Instruction") }}
@@ -185,7 +185,7 @@ watch(() => evaluateStore.highlighting, () => {
                 </div>
             </NScrollbar>
 
-            <div class="w-1/3 max-w-xl shrink-0 h-[calc(100vh-112px)] overflow-y-auto">
+            <div class="w-1/3 max-w-xl shrink-0 h-[calc(100vh-111px)] overflow-y-auto">
                 <NEmpty v-if="evaluateStore.badParts.length < 1" class="mt-8 px-4"
                         :description="$t('Enter your instruction and submission to evaluate')"></NEmpty>
                 <NScrollbar v-else class="p-4" ref="errorScroll">
