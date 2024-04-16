@@ -7,6 +7,13 @@ definePageMeta({
     middleware: "auth"
 });
 
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Profile",
+    description: "User profile",
+    theme: "#056f37"
+});
+
 // Stores
 const authStore = useAuthStore();
 

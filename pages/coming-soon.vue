@@ -10,6 +10,13 @@ definePageMeta({
     title: "Coming soon"
 });
 
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Coming soon",
+    description: "Stay tuned for more updates",
+    theme: "#056f37"
+});
+
 // Props
 //...
 

@@ -7,6 +7,13 @@ definePageMeta({
     middleware: "guest"
 });
 
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Login",
+    description: "Login to your account",
+    theme: "#056f37"
+});
+
 // Composable
 const supabase = useSupabaseClient();
 const config = useRuntimeConfig();

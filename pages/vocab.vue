@@ -17,6 +17,13 @@ useHead({
     ]
 });
 
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Vocab Trainer",
+    description: "Vocab Trainer is a tool to help you learn new words and improve your vocabulary.",
+    theme: "#056f37"
+});
+
 // Stores
 const vocabStore = useVocabStore();
 
@@ -64,7 +71,7 @@ const fetchQuestion = async () => {
         vocabStore.addQuestion(data);
         timer.value = setInterval(() => {
             questionTime.value++;
-        }, 1000)
+        }, 1000);
     } catch (e) {
         message.error("Failed to fetch question! Refresh the page to try again.");
     }
@@ -158,8 +165,8 @@ watch(choices, (newVal) => {
         </div>
 
         <div class="container mx-auto grow px-4 pt-4">
-            <div class="mb-8 flex items-center justify-between">
-                <div class="mt-4 flex items-center gap-1">
+            <div class="h-16 mb-4 flex items-center justify-between">
+                <div class="flex items-center gap-1">
                     <NaiveIcon name="ph:archive-duotone"/>
                     Category: <b class="text">IELTS</b>
                 </div>
@@ -182,8 +189,10 @@ watch(choices, (newVal) => {
                         <NEmpty description="Loading question, if it takes too long, please refresh the page"/>
                     </div>
                     <div v-else class="flex items-start justify-center">
-                        <div class="mx-auto w-screen max-w-xl rounded-lg border bg-white p-6 shadow-xl min-h-20"
-                             ref="questionRef">
+                        <div
+                            class="mx-auto w-screen max-w-xl rounded-lg border bg-white p-6 shadow-xl min-h-20 bg-no-repeat bg-right-top"
+                            :class="vocabStore.currentQuestionData?.isFinished ? 'shadow-2xl' : ''"
+                            ref="questionRef">
                             <Transition name="page">
                                 <NAlert v-if="vocabStore.currentQuestionData?.isFinished" type="success"
                                         class="mb-8 leading-5" :show-icon="false">
@@ -210,47 +219,51 @@ watch(choices, (newVal) => {
                                 Report this question
                             </div>
                         </div>
-                        <div class="ml-12 flex flex-col"
-                             v-if="!isLoadingQuestion && vocabStore.currentQuestionData?.isFinished">
-                            <div class="flex items-center gap-4">
-                                <div class="flex flex-col items-center gap-2 rounded-lg border p-2 shadow-sm">
-                                    <span class="text-gray-500">{{ secondsToMMSS(vocabStore.currentQuestionData.timer) }}</span>
-                                    <div class="flex items-center text-base font-semibold gap-0.5">
-                                        <NaiveIcon name="ph:align-bottom-duotone" class="text-red-500"/>
-                                        12%
+                        <Transition name="page" mode="out-in">
+                            <div class="ml-12 flex flex-col"
+                                 v-if="!isLoadingQuestion && vocabStore.currentQuestionData?.isFinished">
+                                <div class="flex items-center gap-4">
+                                    <div class="flex flex-col items-center gap-2 rounded-lg border p-2 shadow-sm">
+                                        <span class="text-gray-500">{{
+                                                secondsToMMSS(vocabStore.currentQuestionData.timer)
+                                            }}</span>
+                                        <div class="flex items-center text-base font-semibold gap-0.5">
+                                            <NaiveIcon name="ph:align-bottom-duotone" class="text-red-500"/>
+                                            12%
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                        <h1 class="text-3xl font-bold">
+                                            {{
+                                                vocabStore.currentQuestionData.answer.dictionary[0]?.word ?? "..."
+                                            }}
+                                        </h1>
+                                        <span class="text-gray-500">
+                                            {{ vocabStore.currentQuestionData.answer.dictionary[0].phonetic }}
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="flex flex-col gap-2">
-                                    <h1 class="text-3xl font-bold">
-                                        {{
-                                            vocabStore.currentQuestionData.answer.dictionary[0]?.word ?? "..."
-                                        }}
-                                    </h1>
-                                    <span class="text-gray-500">
-                                        {{ vocabStore.currentQuestionData.answer.dictionary[0].phonetic }}
-                                    </span>
+                                <p class="mt-4 text-justify text-base leading-6 text-gray-700">
+                                    {{ vocabStore.currentQuestionData.answer.long_explain }}
+                                </p>
+                                <div
+                                    v-if="vocabStore.currentQuestionData.answer.dictionary[0].meanings.length > 0"
+                                    class="pb-8">
+                                    <hr class="mt-4">
+                                    <NTabs type="segment" animated class="mt-4">
+                                        <NTabPane
+                                            v-for="meaning in vocabStore.currentQuestionData.answer.dictionary[0].meanings"
+                                            :name="meaning.partOfSpeech" :tab="meaning.partOfSpeech.toUpperCase()">
+                                            <ul class="list-disc pl-4 leading-5 space-y-2">
+                                                <li v-for="def in meaning.definitions">
+                                                    {{ def.definition }}
+                                                </li>
+                                            </ul>
+                                        </NTabPane>
+                                    </NTabs>
                                 </div>
                             </div>
-                            <p class="mt-4 text-justify text-base leading-6 text-gray-700">
-                                {{ vocabStore.currentQuestionData.answer.long_explain }}
-                            </p>
-                            <div
-                                v-if="vocabStore.currentQuestionData.answer.dictionary[0].meanings.length > 0"
-                                class="pb-8">
-                                <hr class="mt-4">
-                                <NTabs type="segment" animated class="mt-4">
-                                    <NTabPane
-                                        v-for="meaning in vocabStore.currentQuestionData.answer.dictionary[0].meanings"
-                                        :name="meaning.partOfSpeech" :tab="meaning.partOfSpeech.toUpperCase()">
-                                        <ul class="list-disc pl-4 leading-5 space-y-2">
-                                            <li v-for="def in meaning.definitions">
-                                                {{ def.definition }}
-                                            </li>
-                                        </ul>
-                                    </NTabPane>
-                                </NTabs>
-                            </div>
-                        </div>
+                        </Transition>
                     </div>
                 </Transition>
             </NSpin>
@@ -282,5 +295,9 @@ watch(choices, (newVal) => {
     100% {
         transform: translate(0);
     }
+}
+
+:deep(.n-tabs-rail) {
+    @apply shadow;
 }
 </style>

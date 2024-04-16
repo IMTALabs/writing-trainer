@@ -5,6 +5,13 @@ const { t } = useI18n();
 definePageMeta({
     title: "Privacy"
 });
+
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Privacy",
+    description: "Read our privacy policy to learn how we handle your personal information.",
+    theme: "#056f37"
+});
 </script>
 
 <template>

@@ -14,9 +14,9 @@ const route = useRoute();
 const { t } = useI18n();
 const authStore = useAuthStore();
 
-useSeoMeta({
-    ogImage: "/thumbnail.jpg"
-});
+// useSeoMeta({
+//     ogImage: "/thumbnail.jpg"
+// });
 
 // Data
 const loadingRef = ref(null);

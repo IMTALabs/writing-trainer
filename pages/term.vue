@@ -5,6 +5,13 @@ const { t } = useI18n();
 definePageMeta({
     title: "Terms of Service"
 });
+
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Terms of Service",
+    description: "Read our terms of service to understand the rules and regulations of using our system.",
+    theme: "#056f37"
+});
 </script>
 
 <template>

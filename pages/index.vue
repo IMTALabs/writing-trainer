@@ -13,6 +13,13 @@ definePageMeta({
     title: "Essay Assessment"
 });
 
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Essay Assessment",
+    description: "Essay Assessment is a tool that helps you to evaluate your essay.",
+    theme: "#056f37"
+});
+
 // Theme overrides
 const inputThemeOverrides = {
     border: "none",

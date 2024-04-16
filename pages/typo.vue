@@ -9,6 +9,13 @@ definePageMeta({
     title: "Grammar Checker"
 });
 
+defineOgImageComponent("Frame", {
+    colorMode: "dark",
+    title: "Grammar Checker",
+    description: "Grammar Checker is a tool that helps you to check your grammar and spelling mistakes.",
+    theme: "#056f37"
+});
+
 const typoStore = useTypoStore();
 
 const showSpin = ref(false);

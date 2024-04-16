@@ -7,6 +7,11 @@ export default defineNuxtConfig({
         }
     },
 
+    site: {
+        url: process.env.APP_URL,
+        logo: "/favicon.png"
+    },
+
     devtools: { enabled: true },
 
     modules: [
