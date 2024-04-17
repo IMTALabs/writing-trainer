@@ -174,7 +174,8 @@ watch(choices, (newVal) => {
                          v-if="!isLoadingQuestion && vocabStore.currentQuestionData?.isFinished">
                     Next question
                 </NButton>
-                <div class="flex items-end">
+                <div class="flex items-end border shadow bg-white rounded"
+                     :class="vocabStore.streak ? 'pl-2 pr-3 pt-0.5 pb-1' : 'px-2 py-1'">
                     <img v-if="vocabStore.streak >= 1 && vocabStore.streak <= 3" src="~/assets/images/fire-blue.gif"
                          class="h-6 w-6" alt="">
                     <img v-else-if="vocabStore.streak > 3" src="~/assets/images/fire-red.gif" class="h-6 w-6" alt="">
@@ -190,7 +191,7 @@ watch(choices, (newVal) => {
                     </div>
                     <div v-else class="flex items-start justify-center">
                         <div
-                            class="mx-auto w-screen max-w-xl rounded-lg border bg-white p-6 shadow-xl min-h-20 bg-no-repeat bg-right-top"
+                            class="grow shrink-0 max-w-xl rounded-lg border bg-white p-6 shadow-xl min-h-20 bg-no-repeat bg-right-top"
                             :class="vocabStore.currentQuestionData?.isFinished ? 'shadow-2xl' : ''"
                             ref="questionRef">
                             <Transition name="page">
@@ -220,7 +221,7 @@ watch(choices, (newVal) => {
                             </div>
                         </div>
                         <Transition name="page" mode="out-in">
-                            <div class="ml-12 flex flex-col"
+                            <div class="ml-12 flex flex-col max-w-sm"
                                  v-if="!isLoadingQuestion && vocabStore.currentQuestionData?.isFinished">
                                 <div class="flex items-center gap-4">
                                     <div class="flex flex-col items-center gap-2 rounded-lg border p-2 shadow-sm">
@@ -255,7 +256,7 @@ watch(choices, (newVal) => {
                                             v-for="meaning in vocabStore.currentQuestionData.answer.dictionary[0].meanings"
                                             :name="meaning.partOfSpeech" :tab="meaning.partOfSpeech.toUpperCase()">
                                             <ul class="list-disc pl-4 leading-5 space-y-2">
-                                                <li v-for="def in meaning.definitions">
+                                                <li v-for="def in meaning.definitions.slice(0, 4)">
                                                     {{ def.definition }}
                                                 </li>
                                             </ul>
