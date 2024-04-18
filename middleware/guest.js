@@ -6,11 +6,11 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
     if (authStore.isLoggedIn === null) {
         const user = useSupabaseUser();
         if (user.value) {
-            return navigateTo("/");
+            return navigateTo("/essay");
         }
     } else {
         if (authStore.isLoggedIn) {
-            return navigateTo("/");
+            return navigateTo("/essay");
         }
     }
 });

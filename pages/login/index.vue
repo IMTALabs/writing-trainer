@@ -73,7 +73,7 @@ const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event,
                 authStore.login(data.value.balance);
                 window?.localStorage?.setItem("accessToken", data.value.access_token);
                 window?.localStorage?.setItem("serverId", data.value.id);
-                navigateTo("/");
+                navigateTo("/essay");
             }
             subscription?.unsubscribe();
         } catch (e) {

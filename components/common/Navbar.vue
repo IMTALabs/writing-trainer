@@ -4,7 +4,7 @@
 
 <template>
     <nav class="flex items-center border-b border-solid p-4 space-x-3 shadow-sm">
-        <NuxtLink to="/" class="px-2 hover:bg-gray-200 rounded-md transition-all duration-300">
+        <NuxtLink to="/essay" class="px-2 hover:bg-gray-200 rounded-md transition-all duration-300">
             <n-button text>
                 <template #icon>
                     <n-icon>

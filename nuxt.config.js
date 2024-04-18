@@ -58,5 +58,11 @@ export default defineNuxtConfig({
                 cluster: process.env.PUSHER_APP_CLUSTER
             }
         }
+    },
+
+    router: {
+        options: {
+            scrollBehaviorType: "smooth"
+        }
     }
 });
