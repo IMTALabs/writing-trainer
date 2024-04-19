@@ -11,6 +11,11 @@ defineOgImageComponent("Frame", {
     theme: "#056f37"
 });
 
+useSeoMeta({
+    description: "A collection of tools for improving your English skills",
+    ogDescription: "A collection of tools for improving your English skills"
+});
+
 useHead({
     link: [
         {
@@ -79,7 +84,7 @@ useHead({
             <div class="container-default">
                 <div class="flex items-center justify-between gap-x-8">
                     <!-- Header Logo -->
-                    <h1 class="m-0 flex items-center gap-2 text-lg font-semibold font-body">
+                    <h2 class="m-0 flex items-center gap-2 text-lg font-semibold font-body">
                         <NuxtLink to="/" class="flex items-center gap-1">
                             <img src="https://img.icons8.com/pulsar-color/48/pencil.png" class="h-8 w-8" alt="">
                             <span class="text-black tracking-normal">LAN Trainer</span>
@@ -87,7 +92,7 @@ useHead({
                         <NTag type="error" size="tiny" class="tracking-normal">
                             Beta
                         </NTag>
-                    </h1>
+                    </h2>
                     <!-- Header Logo -->
 
                     <!-- Header Navigation -->
@@ -193,8 +198,8 @@ useHead({
                     <!-- Hero Space -->
 
                     <!-- Hero Background Shape -->
-                    <img src="/assets/img/elements/hero-4-bg-shape.svg" alt="hero-4-bg-shape" height="1038" width="1038"
-                         class="absolute right-0 top-0 -z-10"/>
+                    <!--<img src="/assets/img/elements/hero-4-bg-shape.svg" alt="hero-4-bg-shape" height="1038" width="1038"-->
+                    <!--     class="absolute right-0 top-0 -z-10"/>-->
                     <!-- Background Divider Shape -->
                     <div
                         class="min-h-[65px] w-full bg-[url('/assets/img/elements/home-4-divider-shape-1.svg')] bg-contain bg-[center_bottom] bg-repeat-x"></div>

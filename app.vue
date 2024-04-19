@@ -6,7 +6,14 @@ import SpinnerOne from "~/components/svg/SpinnerOne.vue";
 useHead({
     titleTemplate: (titleChunk) => {
         return titleChunk ? `${ titleChunk } - LAN Trainer` : "LAN Trainer";
-    }
+    },
+    link: [
+        {
+            rel: "icon",
+            type: "image/png",
+            href: "/favicon.png"
+        }
+    ]
 });
 
 // Composable
@@ -60,7 +67,7 @@ onMounted(() => {
                     <NLoadingBarProvider>
                         <NDialogProvider>
                             <NModalProvider>
-                                <div ref="loadingRef"
+                                <div ref="loadingRef" v-show="!['index'].includes(route.name)"
                                      class="fixed z-10 flex h-screen w-screen items-center justify-center gap-2 bg-white text-gray-300">
                                     <SpinnerOne/>
                                     Fetching user information
