@@ -186,7 +186,7 @@ useHead({
                                 <!-- Hero Image Block -->
                                 <div class="flex justify-center lg:justify-start">
                                     <div class="relative inline-block">
-                                        <img src="/4354122.png" alt="hero-img" class="max-w-full"/>
+                                        <img src="/4354122.webp" alt="hero-img" class="max-w-full"/>
                                     </div>
                                 </div>
                                 <!-- Hero Image Block -->
@@ -365,7 +365,7 @@ useHead({
 
                             <!-- Content Image Block -->
                             <div class="jos order-1 flex justify-center" data-jos_animation="fade-left">
-                                <img src="/4354123.png" alt="content-img-1" width="450"
+                                <img src="/4354123.webp" alt="content-img-1" width="450"
                                      height="532"/>
                             </div>
                             <!-- Content Image Block -->
@@ -1181,7 +1181,7 @@ useHead({
 
                             <!-- Content Image Block -->
                             <div class="jos order-2 flex justify-center" data-jos_animation="fade-left">
-                                <img src="/4354124.png" alt="content-img-1" width="450"
+                                <img src="/4354124.webp" alt="content-img-1" width="450"
                                      height="532"/>
                             </div>
                             <!-- Content Image Block -->
@@ -1225,7 +1225,7 @@ useHead({
                                         confident communicating in English. Highly recommended!"
                                     </p>
                                     <div class="flex items-center gap-[10px]">
-                                        <img src="/chloe.jpg" alt="testimonial-avatar"
+                                        <img src="/chloe.webp" alt="testimonial-avatar"
                                              class="aspect-square w-12 object-cover"/>
                                         <div>
                                             <span class="block font-semibold text-ColorBlack">Chloe Đinh</span>
@@ -1249,7 +1249,7 @@ useHead({
                                         using it.”
                                     </p>
                                     <div class="flex items-center gap-[10px]">
-                                        <img src="/milktea.jpeg" alt="testimonial-avatar"
+                                        <img src="/milktea.webp" alt="testimonial-avatar"
                                              class="aspect-square w-12 object-cover"/>
                                         <div>
                                             <span class="block font-semibold text-ColorBlack">Milk Tea</span>
